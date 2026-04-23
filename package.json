@@ -39,7 +39,7 @@
     "react-select": "5.8.0",
     "sweetalert2": "11.22.5",
     "swiper": "11.2.10",
-    "tailwindcss": "3.4.3",
+    "tailwindcss": "3.4.19",
     "yup": "1.4.0"
   },
   "devDependencies": {
