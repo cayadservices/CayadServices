@@ -31,8 +31,8 @@ export type AquaDisplayPricingResult = {
 };
 
 export type AquaRouteFuelLike = {
-  origin?: { fuel?: { regularPrice?: NumericLike } | null } | null;
-  destination?: { fuel?: { regularPrice?: NumericLike } | null } | null;
+  origin?: { fuel?: { regularPrice?: NumericLike; dieselPrice?: NumericLike } | null } | null;
+  destination?: { fuel?: { regularPrice?: NumericLike; dieselPrice?: NumericLike } | null } | null;
 } | null;
 
 export const FUEL_ESTIMATE_MPG = 6.5;
@@ -195,8 +195,12 @@ export function computeFuelGuardFloor(
   routeInsights: AquaRouteFuelLike,
 ): number | null {
   const distance = toFiniteNumber(distanceMiles);
-  const originFuelPrice = toFiniteNumber(routeInsights?.origin?.fuel?.regularPrice);
-  const destinationFuelPrice = toFiniteNumber(routeInsights?.destination?.fuel?.regularPrice);
+  const originFuelPrice = toFiniteNumber(
+    routeInsights?.origin?.fuel?.dieselPrice ?? routeInsights?.origin?.fuel?.regularPrice,
+  );
+  const destinationFuelPrice = toFiniteNumber(
+    routeInsights?.destination?.fuel?.dieselPrice ?? routeInsights?.destination?.fuel?.regularPrice,
+  );
 
   const routeFuelPrice = originFuelPrice != null && destinationFuelPrice != null
     ? (originFuelPrice + destinationFuelPrice) / 2

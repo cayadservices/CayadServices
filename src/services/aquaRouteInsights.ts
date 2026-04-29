@@ -21,11 +21,13 @@ export type AquaRouteInsightsResponse = {
   origin?: {
     fuel?: {
       regularPrice?: number | null;
+      dieselPrice?: number | null;
     } | null;
   } | null;
   destination?: {
     fuel?: {
       regularPrice?: number | null;
+      dieselPrice?: number | null;
     } | null;
   } | null;
 } | null;
