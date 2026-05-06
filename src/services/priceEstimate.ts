@@ -1,4 +1,4 @@
-import { apiUrl } from "./config";
+import { apiUrl, estimatorApiUrl } from "./config";
 
 export type TransportType = "open" | "enclosed";
 
@@ -103,12 +103,18 @@ export async function postPriceEstimate(payload: PriceEstimateRequest, signal?: 
     }
   }
 
-  const canonical = apiUrl("/api/public/price-estimate/");
+  const canonical = estimatorApiUrl("/api/public/price-estimate/");
+  const legacyCanonical = apiUrl("/api/public/price-estimate/");
   const alias = apiUrl("/leads/public/price-estimate/");
   const body = JSON.stringify(payload);
   const requestPromise = (async () => {
     try {
       let res = await fetch(canonical, { method: "POST", headers: { "Content-Type": "application/json" }, body, signal });
+      if (!res.ok && legacyCanonical !== canonical) {
+        const errorText = await res.text().catch(() => '');
+        console.warn(`[priceEstimate] Estimator endpoint failed (${res.status}):`, errorText);
+        res = await fetch(legacyCanonical, { method: "POST", headers: { "Content-Type": "application/json" }, body, signal });
+      }
       if (!res.ok) {
         const errorText = await res.text().catch(() => '');
         console.warn(`[priceEstimate] Primary endpoint failed (${res.status}):`, errorText);

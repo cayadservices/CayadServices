@@ -1,4 +1,4 @@
-import { apiUrl } from "./config";
+import { apiUrl, estimatorApiUrl } from "./config";
 
 export type AquaRouteInsightsLocation = {
   zip?: string;
@@ -62,9 +62,10 @@ export async function postAquaRouteInsights(
   const requestPromise = (async () => {
     try {
       const endpoints = [
+        estimatorApiUrl("/api/public/aqua-route-insights/"),
         apiUrl("/api/public/aqua-route-insights/"),
         "/api/aqua-route-insights",
-      ];
+      ].filter((endpoint, index, all) => endpoint && all.indexOf(endpoint) === index);
 
       for (const endpoint of endpoints) {
         const res = await fetch(endpoint, {
