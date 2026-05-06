@@ -470,9 +470,11 @@ export default function EstimatorQuote({ embedded = false }: { embedded?: boolea
             return acc + (Number.isFinite(n2) ? n2 : (Number.isFinite(d2) ? Math.round(d2 * 1.15 * 100) / 100 : 0));
           }, 0);
         let usedMiles: number | null = null;
+        const requestedMiles = typeof unifiedResp.requested_route_distance_miles === 'number' ? unifiedResp.requested_route_distance_miles : undefined;
         const pricingMiles = typeof unifiedResp.distance_used_for_pricing_miles === 'number' ? unifiedResp.distance_used_for_pricing_miles : undefined;
         const refFromResp = typeof unifiedResp.reference_distance_miles === 'number' ? unifiedResp.reference_distance_miles : undefined;
-        if (typeof pricingMiles === 'number') usedMiles = pricingMiles;
+        if (typeof requestedMiles === 'number') usedMiles = requestedMiles;
+        else if (typeof pricingMiles === 'number') usedMiles = pricingMiles;
         else if (typeof refFromResp === 'number') usedMiles = refFromResp;
         else {
           const dist = await distancePromise;
@@ -540,9 +542,11 @@ export default function EstimatorQuote({ embedded = false }: { embedded?: boolea
           return acc + (Number.isFinite(n2) ? n2 : (Number.isFinite(d2) ? Math.round(d2 * 1.15 * 100) / 100 : 0));
         }, 0);
         let usedMiles: number | null = null;
+        const requestedMiles = avail.find(r => typeof r?.data?.requested_route_distance_miles === 'number')?.data?.requested_route_distance_miles;
         const pricingMiles = avail.find(r => typeof r?.data?.distance_used_for_pricing_miles === 'number')?.data?.distance_used_for_pricing_miles;
         const refFromResp = avail.find(r => typeof r?.data?.reference_distance_miles === 'number')?.data?.reference_distance_miles;
-        if (typeof pricingMiles === 'number') usedMiles = pricingMiles;
+        if (typeof requestedMiles === 'number') usedMiles = requestedMiles;
+        else if (typeof pricingMiles === 'number') usedMiles = pricingMiles;
         else if (typeof refFromResp === 'number') usedMiles = refFromResp;
         else {
           const dist = await distancePromise;

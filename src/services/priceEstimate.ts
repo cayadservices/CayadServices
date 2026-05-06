@@ -68,6 +68,7 @@ export type PriceEstimateResponse = {
   discounted_estimate_total?: number;
   normal_estimate_total?: number;
   // Distances used for pricing and reference
+  requested_route_distance_miles?: number;
   distance_used_for_pricing_miles?: number;
   reference_distance_miles?: number;
   estimated_transit_days?: number;
