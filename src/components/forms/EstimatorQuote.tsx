@@ -1431,7 +1431,7 @@ export default function EstimatorQuote({ embedded = false }: { embedded?: boolea
               <div className="flex gap-2 items-stretch">
                 <button type="button" onClick={() => setActiveStep(0)} className="inline-flex items-center justify-center rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Back</button>
                 <button className="flex-1 inline-flex items-center justify-center rounded-lg bg-sky-600 text-white font-semibold py-2.5 text-xs hover:bg-sky-700 transition-colors" type="button" disabled={busy} onClick={proceedToEstimate}>
-                  {busy ? "Calculating..." : `Get My Estimated Price${vehicles.length > 0 ? ` · ${numberToWord(vehicles.length)}` : ''}`}
+                  {busy ? "loading..." : `Get My Estimated Price${vehicles.length > 0 ? ` · ${numberToWord(vehicles.length)}` : ''}`}
                 </button>
               </div>
             </form>
