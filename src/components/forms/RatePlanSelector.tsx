@@ -80,7 +80,7 @@ export default function RatePlanSelector({
                     </div>
                 </div>
 
-                <p className="text-center text-[10px] text-slate-400">Updating prices...</p>
+                <p className="text-center text-[10px] text-slate-400">Updating...</p>
             </div>
         );
     }
@@ -104,7 +104,7 @@ export default function RatePlanSelector({
                     <span className="text-slate-400">{vehicleCount} vehicle{vehicleCount !== 1 ? 's' : ''}</span>
                 </div>
                 {/* Confidence indicator - inline */}
-                {confidencePct != null && (
+                {/* {confidencePct != null && (
                     <div className="flex items-center gap-2">
                         <span className="text-[10px] text-slate-500">Confidence</span>
                         <div className="w-16 h-1.5 rounded-full bg-slate-200 overflow-hidden">
@@ -118,7 +118,7 @@ export default function RatePlanSelector({
                         </div>
                         <span className="text-[10px] font-semibold text-slate-600">{confidencePct}%</span>
                     </div>
-                )}
+                )} */}
             </div>
 
             {/* Rate Plan Selection - Two cards side by side on desktop */}
@@ -150,7 +150,7 @@ export default function RatePlanSelector({
                         </div>
 
                         {/* Price */}
-                        <p className="text-2xl font-black text-slate-900 mb-3">${prices.normal.toFixed(0)}</p>
+                        {/* <p className="text-2xl font-black text-slate-900 mb-3">${prices.normal.toFixed(0)}</p> */}
 
                         {/* Features */}
                         <div className="space-y-1.5 border-t border-slate-100 pt-3">
@@ -205,7 +205,7 @@ export default function RatePlanSelector({
                         </div>
 
                         {/* Price */}
-                        <p className="text-2xl font-black text-slate-900 mb-3">${prices.discounted.toFixed(0)}</p>
+                        {/* <p className="text-2xl font-black text-slate-900 mb-3">${prices.discounted.toFixed(0)}</p> */}
 
                         {/* Features */}
                         <div className="space-y-1.5 border-t border-slate-100 pt-3">
@@ -236,7 +236,7 @@ export default function RatePlanSelector({
 
             {/* Price varies disclaimer */}
             <p className="text-[12px] text-slate-400 text-center font-semibold">
-Final price may vary. Call a specialist to know yours.
+        Final price may be adapted to your needs.
 
 </p>
         </div>

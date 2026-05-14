@@ -985,9 +985,9 @@ export default function EstimatorQuote({ embedded = false }: { embedded?: boolea
         <div className={`${padding} pb-4 mb-2 border-b border-slate-200 transition-all duration-300 ease-in-out`}>
           <div className="flex items-center justify-between">
             <h1 className={`${titleSize} font-bold text-slate-800`}>
-              {activeStep === 0 && 'Get Your Instant Price'}
+              {activeStep === 0 && 'Get Your Premium Price'}
               {activeStep === 1 && 'What Are You Shipping?'}
-              {activeStep === 2 && 'Your Estimated Price!'}
+              {activeStep === 2 && 'Flexible and Affordable!'}
               {activeStep === 3 && 'Almost Done!'}
             </h1>
             {activeStep === 3 && (
