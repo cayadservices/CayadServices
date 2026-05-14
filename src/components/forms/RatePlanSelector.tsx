@@ -90,8 +90,8 @@ export default function RatePlanSelector({
     return (
         <div className="space-y-3">
             {/* Shared Route Info - compact horizontal bar */}
-            <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-50 rounded-lg px-3 py-2 border border-slate-100">
-                <div className="flex items-center gap-3 text-[11px] text-slate-600">
+            {/* <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-50 rounded-lg px-3 py-2 border border-slate-100"> */}
+                {/* <div className="flex items-center gap-3 text-[11px] text-slate-600">
                     {miles != null && (
                         <span className="font-medium">{miles.toLocaleString()} mi</span>
                     )}
@@ -102,7 +102,7 @@ export default function RatePlanSelector({
                         <span className="text-slate-500">{transit}</span>
                     )}
                     <span className="text-slate-400">{vehicleCount} vehicle{vehicleCount !== 1 ? 's' : ''}</span>
-                </div>
+                </div> */}
                 {/* Confidence indicator - inline */}
                 {/* {confidencePct != null && (
                     <div className="flex items-center gap-2">
@@ -119,7 +119,7 @@ export default function RatePlanSelector({
                         <span className="text-[10px] font-semibold text-slate-600">{confidencePct}%</span>
                     </div>
                 )} */}
-            </div>
+            {/* </div> */}
 
             {/* Rate Plan Selection - Two cards side by side on desktop */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -189,7 +189,7 @@ export default function RatePlanSelector({
                     {/* Badge */}
                     <div className={`absolute top-0 right-0 text-[9px] font-bold px-2 py-0.5 rounded-bl-lg uppercase tracking-wider flex items-center gap-1 ${!isPremium ? 'bg-emerald-500 text-white' : 'bg-emerald-100 text-emerald-700'
                         }`}>
-                        <FaTag size={8} /> Save ${savings.toFixed(0)}
+                        <FaTag size={8} /> Save ${/*{savings.toFixed(0)}*/}
                     </div>
 
                     <div className="p-4 pt-6">
