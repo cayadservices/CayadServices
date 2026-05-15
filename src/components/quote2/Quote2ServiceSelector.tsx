@@ -156,14 +156,12 @@ export default function Quote2ServiceSelector() {
                             <div>
                                 <h1 className="text-2xl font-bold flex items-center gap-3">
                                     <FaQuoteRight className="text-sky-300" />
-                                    Your Quote is Ready!
+                                    Your quote is on its way!
                                 </h1>
                                 <p className="text-sky-100 text-sm mt-1 ml-9">The price is guaranteed for 7 days after booking.</p>
                             </div>
                             <div>
-                                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white text-xs font-semibold border border-white/20 backdrop-blur-sm">
-                                    <FaCheck size={10} /> Live Rate
-                                </span>
+                                
                             </div>
                         </div>
 
@@ -247,14 +245,14 @@ export default function Quote2ServiceSelector() {
                                             <h3 className="text-lg font-bold text-sky-900">Standard Priority Service</h3>
                                             <p className="text-xs text-sky-600">Fast pickup • VIP Support</p>
                                         </div>
-                                        <span className="ml-auto bg-sky-100 text-sky-700 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                                        {/* <span className="ml-auto bg-sky-100 text-sky-700 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                                             <FaCheck size={10} /> Selected
-                                        </span>
+                                        </span> */}
                                     </div>
-                                    <div className="flex items-baseline gap-2">
+                                    {/* <div className="flex items-baseline gap-2">
                                         <span className="text-3xl font-black text-slate-900">${normalTotal?.toFixed(0) ?? '---'}</span>
                                         <span className="text-sm text-slate-500">USD</span>
-                                    </div>
+                                    </div> */}
                                 </div>
                             ) : (
                                 <div className="p-6">
@@ -284,7 +282,7 @@ export default function Quote2ServiceSelector() {
                 </div>
 
                 {/* RIGHT COLUMN: Summary & CTA */}
-                <div className="lg:col-span-4 space-y-6">
+                {/* <div className="lg:col-span-4 space-y-6">
 
                     <div className="bg-white rounded-3xl shadow-lg shadow-sky-900/5 border border-slate-100 p-6 md:p-8">
                         <div className="text-center mb-6">
@@ -346,7 +344,7 @@ export default function Quote2ServiceSelector() {
                     </div>
 
                     <RotatingTrustBadge />
-                </div>
+                </div> */}
 
             </div>
 

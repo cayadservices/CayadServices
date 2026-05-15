@@ -80,7 +80,7 @@ export default function RatePlanSelector({
                     </div>
                 </div>
 
-                <p className="text-center text-[10px] text-slate-400">Updating prices...</p>
+                <p className="text-center text-[10px] text-slate-400">Updating...</p>
             </div>
         );
     }
@@ -90,8 +90,8 @@ export default function RatePlanSelector({
     return (
         <div className="space-y-3">
             {/* Shared Route Info - compact horizontal bar */}
-            <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-50 rounded-lg px-3 py-2 border border-slate-100">
-                <div className="flex items-center gap-3 text-[11px] text-slate-600">
+            {/* <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-50 rounded-lg px-3 py-2 border border-slate-100"> */}
+                {/* <div className="flex items-center gap-3 text-[11px] text-slate-600">
                     {miles != null && (
                         <span className="font-medium">{miles.toLocaleString()} mi</span>
                     )}
@@ -102,9 +102,9 @@ export default function RatePlanSelector({
                         <span className="text-slate-500">{transit}</span>
                     )}
                     <span className="text-slate-400">{vehicleCount} vehicle{vehicleCount !== 1 ? 's' : ''}</span>
-                </div>
+                </div> */}
                 {/* Confidence indicator - inline */}
-                {confidencePct != null && (
+                {/* {confidencePct != null && (
                     <div className="flex items-center gap-2">
                         <span className="text-[10px] text-slate-500">Confidence</span>
                         <div className="w-16 h-1.5 rounded-full bg-slate-200 overflow-hidden">
@@ -118,8 +118,8 @@ export default function RatePlanSelector({
                         </div>
                         <span className="text-[10px] font-semibold text-slate-600">{confidencePct}%</span>
                     </div>
-                )}
-            </div>
+                )} */}
+            {/* </div> */}
 
             {/* Rate Plan Selection - Two cards side by side on desktop */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -150,7 +150,7 @@ export default function RatePlanSelector({
                         </div>
 
                         {/* Price */}
-                        <p className="text-2xl font-black text-slate-900 mb-3">${prices.normal.toFixed(0)}</p>
+                        {/* <p className="text-2xl font-black text-slate-900 mb-3">${prices.normal.toFixed(0)}</p> */}
 
                         {/* Features */}
                         <div className="space-y-1.5 border-t border-slate-100 pt-3">
@@ -189,7 +189,7 @@ export default function RatePlanSelector({
                     {/* Badge */}
                     <div className={`absolute top-0 right-0 text-[9px] font-bold px-2 py-0.5 rounded-bl-lg uppercase tracking-wider flex items-center gap-1 ${!isPremium ? 'bg-emerald-500 text-white' : 'bg-emerald-100 text-emerald-700'
                         }`}>
-                        <FaTag size={8} /> Save ${savings.toFixed(0)}
+                        <FaTag size={8} /> Save ${/*{savings.toFixed(0)}*/}
                     </div>
 
                     <div className="p-4 pt-6">
@@ -205,7 +205,7 @@ export default function RatePlanSelector({
                         </div>
 
                         {/* Price */}
-                        <p className="text-2xl font-black text-slate-900 mb-3">${prices.discounted.toFixed(0)}</p>
+                        {/* <p className="text-2xl font-black text-slate-900 mb-3">${prices.discounted.toFixed(0)}</p> */}
 
                         {/* Features */}
                         <div className="space-y-1.5 border-t border-slate-100 pt-3">
@@ -236,7 +236,7 @@ export default function RatePlanSelector({
 
             {/* Price varies disclaimer */}
             <p className="text-[12px] text-slate-400 text-center font-semibold">
-Final price may vary. Call a specialist to know yours.
+        Final price may be adapted to your needs.
 
 </p>
         </div>
