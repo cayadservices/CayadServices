@@ -85,7 +85,7 @@ const { title, content, isLanding = false } = Astro.props;
 
     <ShareButton />
 
-    <script is:inline>
+    <script is:inline define:vars={{ apiUrl: import.meta.env.PUBLIC_API_URL, apiKey: import.meta.env.PUBLIC_API_KEY }}>
       document.addEventListener('click', function(e) {
         const target = e.target.closest('a');
         if (!target) return;
@@ -100,6 +100,19 @@ const { title, content, isLanding = false } = Astro.props;
         }
         else if (href.startsWith('tel:')) {
           gtag('event', 'click_call');
+          if (apiUrl && apiKey) {
+            fetch((apiUrl || '').replace(/\/+$/, '') + '/landing-phone-click/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-API-KEY': apiKey,
+              },
+              body: JSON.stringify({
+                phone_number: href.replace('tel:', '').trim(),
+                source: 'landing',
+              }),
+            }).catch(function() {});
+          }
         }
       });
 
