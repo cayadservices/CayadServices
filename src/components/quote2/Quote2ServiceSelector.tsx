@@ -262,19 +262,19 @@ export default function Quote2ServiceSelector() {
                                         </div>
                                         <div>
                                             <h3 className="text-lg font-bold text-slate-800">Economy Service</h3>
-                                            <p className="text-xs text-emerald-600">Flexible pickup • Save ${savings.toFixed(0)}</p>
+                                            <p className="text-xs text-emerald-600">Flexible pickup • Save ${/*{savings.toFixed(0)}*/}</p>
                                         </div>
                                         <span className="ml-auto bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                                             <FaCheck size={10} /> Selected
                                         </span>
                                     </div>
-                                    <div className="flex items-baseline gap-2">
+                                    {/* <div className="flex items-baseline gap-2">
                                         <span className="text-3xl font-black text-slate-900">${discountedTotal?.toFixed(0) ?? '---'}</span>
                                         <span className="text-sm text-slate-500">USD</span>
                                         {normalTotal && (
                                             <span className="text-sm text-slate-400 line-through ml-2">${normalTotal.toFixed(0)}</span>
                                         )}
-                                    </div>
+                                    </div> */}
                                 </div>
                             )}
                         </div>
