@@ -349,7 +349,7 @@ export default function Quote2ServiceSelector() {
             </div>
 
             {/* Mobile Bottom Bar (Fixed) */}
-            <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 z-50 lg:hidden shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+            {/* <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 z-50 lg:hidden shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
                 <div className="flex items-center justify-between gap-4 max-w-lg mx-auto">
                     <div>
                         <p className="text-xs text-slate-500 font-bold uppercase">Total</p>
@@ -363,7 +363,7 @@ export default function Quote2ServiceSelector() {
                         Verify Card <FaArrowRight size={12} className="opacity-70" />
                     </button>
                 </div>
-            </div>
+            </div> */}
             <div className="h-24 lg:hidden"></div>
 
         </div>
