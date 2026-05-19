@@ -262,19 +262,19 @@ export default function Quote2ServiceSelector() {
                                         </div>
                                         <div>
                                             <h3 className="text-lg font-bold text-slate-800">Economy Service</h3>
-                                            <p className="text-xs text-emerald-600">Flexible pickup • Save ${savings.toFixed(0)}</p>
+                                            <p className="text-xs text-emerald-600">Flexible pickup • Save ${/*{savings.toFixed(0)}*/}</p>
                                         </div>
                                         <span className="ml-auto bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                                             <FaCheck size={10} /> Selected
                                         </span>
                                     </div>
-                                    <div className="flex items-baseline gap-2">
+                                    {/* <div className="flex items-baseline gap-2">
                                         <span className="text-3xl font-black text-slate-900">${discountedTotal?.toFixed(0) ?? '---'}</span>
                                         <span className="text-sm text-slate-500">USD</span>
                                         {normalTotal && (
                                             <span className="text-sm text-slate-400 line-through ml-2">${normalTotal.toFixed(0)}</span>
                                         )}
-                                    </div>
+                                    </div> */}
                                 </div>
                             )}
                         </div>
@@ -349,7 +349,7 @@ export default function Quote2ServiceSelector() {
             </div>
 
             {/* Mobile Bottom Bar (Fixed) */}
-            <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 z-50 lg:hidden shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+            {/* <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 z-50 lg:hidden shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
                 <div className="flex items-center justify-between gap-4 max-w-lg mx-auto">
                     <div>
                         <p className="text-xs text-slate-500 font-bold uppercase">Total</p>
@@ -363,7 +363,7 @@ export default function Quote2ServiceSelector() {
                         Verify Card <FaArrowRight size={12} className="opacity-70" />
                     </button>
                 </div>
-            </div>
+            </div> */}
             <div className="h-24 lg:hidden"></div>
 
         </div>
