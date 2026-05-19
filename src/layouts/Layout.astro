@@ -85,34 +85,50 @@ const { title, content, isLanding = false } = Astro.props;
 
     <ShareButton />
 
-    <script is:inline define:vars={{ apiUrl: import.meta.env.PUBLIC_API_URL, apiKey: import.meta.env.PUBLIC_API_KEY }}>
+    <script is:inline define:vars={{
+      apiUrl: import.meta.env.PUBLIC_API_URL,
+      estimatorApiUrl: import.meta.env.PUBLIC_ESTIMATOR_API_URL,
+      apiKey: import.meta.env.PUBLIC_API_KEY
+    }}>
       document.addEventListener('click', function(e) {
         const target = e.target.closest('a');
         if (!target) return;
         const href = target.href || "";
+        const landingApiBase = (apiUrl || estimatorApiUrl || 'https://crm.cayadservices.com').replace(/\/+$/, '');
+        const landingApiKey = apiKey || 'test';
+
+        function trackLandingClick(source, extra) {
+          if (!landingApiBase || !landingApiKey) return;
+          fetch(landingApiBase + '/api/landing-phone-click/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-API-KEY': landingApiKey,
+            },
+            body: JSON.stringify(Object.assign({
+              phone_number: '+14696190747',
+              source: source,
+              page_url: window.location.href,
+            }, extra || {})),
+            keepalive: true,
+          }).catch(function() {});
+        }
 
         // Seguimiento unificado hacia GA4 (Google Ads importará desde aquí)
         if (href.includes('wa.me') || href.includes('whatsapp.com')) {
-          gtag('event', 'click_whatsapp');
+          if (typeof gtag === 'function') gtag('event', 'click_whatsapp');
+          trackLandingClick('landing_whatsapp', { target_url: href });
         }
         else if (href.includes('m.me')) {
-          gtag('event', 'click_messenger');
+          if (typeof gtag === 'function') gtag('event', 'click_messenger');
+          trackLandingClick('landing_messenger', { target_url: href });
         }
         else if (href.startsWith('tel:')) {
-          gtag('event', 'click_call');
-          if (apiUrl && apiKey) {
-            fetch((apiUrl || '').replace(/\/+$/, '') + '/landing-phone-click/', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'X-API-KEY': apiKey,
-              },
-              body: JSON.stringify({
-                phone_number: href.replace('tel:', '').trim(),
-                source: 'landing',
-              }),
-            }).catch(function() {});
-          }
+          if (typeof gtag === 'function') gtag('event', 'click_call');
+          trackLandingClick('landing_call', {
+            phone_number: href.replace('tel:', '').trim(),
+            target_url: href,
+          });
         }
       });
 
