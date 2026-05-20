@@ -38,8 +38,9 @@ export default function RatePlanSelector({
     confidencePct,
     vehicleCount = 1,
 }: RatePlanSelectorProps) {
-    // Show skeleton loader while loading - maintains layout
-    if (loading || !prices) {
+    // Show skeleton loader only while a real refresh is running. The landing
+    // flow can intentionally skip price estimates and still show the plan view.
+    if (loading) {
         return (
             <div className="space-y-3 animate-pulse">
                 {/* Skeleton for route info bar */}
@@ -85,7 +86,7 @@ export default function RatePlanSelector({
         );
     }
 
-    const savings = prices.normal - prices.discounted;
+    const savings = prices ? prices.normal - prices.discounted : null;
 
     return (
         <div className="space-y-3">
@@ -189,7 +190,7 @@ export default function RatePlanSelector({
                     {/* Badge */}
                     <div className={`absolute top-0 right-0 text-[9px] font-bold px-2 py-0.5 rounded-bl-lg uppercase tracking-wider flex items-center gap-1 ${!isPremium ? 'bg-emerald-500 text-white' : 'bg-emerald-100 text-emerald-700'
                         }`}>
-                        <FaTag size={8} /> Save ${/*{savings.toFixed(0)}*/}
+                        <FaTag size={8} /> {savings != null && savings > 0 ? `Save $${savings.toFixed(0)}` : 'Save $'}
                     </div>
 
                     <div className="p-4 pt-6">

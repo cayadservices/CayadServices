@@ -46,6 +46,7 @@ const formatVehicleType = (type: string | undefined | null): string => {
 };
 
 type TransportTypeVal = "1" | "2"; // 1 Open, 2 Enclosed
+const USE_PRICE_ESTIMATE_API = false;
 
 type Step1Values = {
   origin_city: string;
@@ -711,7 +712,18 @@ export default function EstimatorQuote({ embedded = false }: { embedded?: boolea
 
     if (listToUse.length === 0) return;
 
-    await computeEstimate(listToUse);
+    if (USE_PRICE_ESTIMATE_API) {
+      await computeEstimate(listToUse);
+    } else {
+      setMiles(null);
+      setTransit(null);
+      setEstimate(null);
+      setDiscountedTotal(null);
+      setNormalTotal(null);
+      setEstResponses([]);
+      setConfidencePct(null);
+      setBusy(false);
+    }
     setActiveStep(2);
   };
 
@@ -728,6 +740,7 @@ export default function EstimatorQuote({ embedded = false }: { embedded?: boolea
   const recomputeTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    if (!USE_PRICE_ESTIMATE_API) return;
     // Only trigger recompute if we're on Step 2 (price display step)
     if (activeStep !== 2) return;
     if (!watchedOriginValid || !watchedDestValid) return;
