@@ -21,6 +21,8 @@ export async function sendLeadToLanding(input: LandingFormInput): Promise<Landin
   const payload = {
     ...buildLandingPayloadWithRoute(input),
     ...(ip ? { client_ip: ip } : {}),
+    auto_convert: true,
+    landing_source: "landing_form",
   };
 
   // Build the endpoint URL robustly. If BASE is provided use it as base,
