@@ -1,0 +1,130 @@
+<script is:inline define:vars={{
+  apiUrl: import.meta.env.PUBLIC_API_URL,
+  estimatorApiUrl: import.meta.env.PUBLIC_ESTIMATOR_API_URL,
+  apiKey: import.meta.env.PUBLIC_API_KEY
+}}>
+  const landingApiBase = (apiUrl || estimatorApiUrl || 'https://crm.cayadservices.com').replace(/\/+$/, '');
+  const landingApiKey = apiKey || 'test';
+  const TRACKING_NAVIGATION_TIMEOUT_MS = 350;
+
+  function pushMarketingEvent(eventName, params) {
+    const payload = Object.assign({ event: eventName }, params || {});
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(payload);
+    if (typeof gtag === 'function') gtag('event', eventName, params || {});
+  }
+
+  function trackLandingClick(source, extra) {
+    if (!landingApiBase || !landingApiKey) return Promise.resolve();
+
+    const payload = Object.assign({
+      api_key: landingApiKey,
+      phone_number: '+14696190747',
+      source: source,
+      page_url: window.location.href,
+    }, extra || {});
+    const endpoint = landingApiBase + '/api/landing-phone-click/';
+
+    if (navigator.sendBeacon) {
+      const beaconBody = new FormData();
+      Object.keys(payload).forEach(function(key) {
+        beaconBody.append(key, payload[key]);
+      });
+
+      if (navigator.sendBeacon(endpoint, beaconBody)) {
+        return Promise.resolve();
+      }
+    }
+
+    return fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: new URLSearchParams(payload),
+      keepalive: true,
+    }).catch(function() {});
+  }
+
+  function prepareNavigation(anchor, href, event) {
+    const opensNewTab =
+      anchor.target === '_blank' ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.button === 1;
+
+    if (opensNewTab) {
+      const nextWindow = window.open('', '_blank', 'noopener,noreferrer');
+      if (nextWindow) {
+        nextWindow.opener = null;
+        return function() {
+          nextWindow.location = href;
+        };
+      }
+    }
+
+    return function() {
+      window.location.href = href;
+    };
+  }
+
+  async function waitBrieflyForTracking(promise) {
+    await Promise.race([
+      promise,
+      new Promise(function(resolve) {
+        window.setTimeout(resolve, TRACKING_NAVIGATION_TIMEOUT_MS);
+      }),
+    ]);
+  }
+
+  document.addEventListener('click', function(e) {
+    const target = e.target.closest('a');
+    if (!target) return;
+    const href = target.href || "";
+    let trackingPromise = null;
+
+    if (href.includes('wa.me') || href.includes('whatsapp.com')) {
+      pushMarketingEvent('click_whatsapp', { target_url: href });
+      trackingPromise = trackLandingClick('landing_whatsapp', { target_url: href });
+    }
+    else if (href.includes('m.me')) {
+      pushMarketingEvent('click_messenger', { target_url: href });
+      trackingPromise = trackLandingClick('landing_messenger', { target_url: href });
+    }
+    else if (href.startsWith('tel:')) {
+      pushMarketingEvent('click_call', { phone_number: href.replace('tel:', '').trim(), target_url: href });
+      trackingPromise = trackLandingClick('landing_call', {
+        phone_number: href.replace('tel:', '').trim(),
+        target_url: href,
+      });
+    }
+
+    if (!trackingPromise) return;
+
+    e.preventDefault();
+    const continueNavigation = prepareNavigation(target, href, e);
+    waitBrieflyForTracking(trackingPromise).finally(function() {
+      continueNavigation();
+    });
+  });
+
+  document.addEventListener('submit', function() {
+    pushMarketingEvent('submit_quote');
+  });
+
+  window.trackPurchase = function(value, transaction_id) {
+    pushMarketingEvent('purchase', {
+      'transaction_id': transaction_id || 'T_' + new Date().getTime(),
+      'value': value || 50.0,
+      'currency': 'USD',
+      'items': [
+        {
+          'item_name': 'Auto Transport Service',
+          'price': value || 50.0,
+          'quantity': 1
+        }
+      ]
+    });
+  };
+</script>
