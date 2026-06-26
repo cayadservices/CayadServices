@@ -109,56 +109,107 @@ const { title, content, isLanding = false } = Astro.props;
       estimatorApiUrl: import.meta.env.PUBLIC_ESTIMATOR_API_URL,
       apiKey: import.meta.env.PUBLIC_API_KEY
     }}>
+      const landingApiBase = (apiUrl || estimatorApiUrl || 'https://crm.cayadservices.com').replace(/\/+$/, '');
+      const landingApiKey = apiKey || 'test';
+      const TRACKING_NAVIGATION_TIMEOUT_MS = 350;
+
+      function pushMarketingEvent(eventName, params) {
+        const payload = Object.assign({ event: eventName }, params || {});
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push(payload);
+        if (typeof gtag === 'function') gtag('event', eventName, params || {});
+      }
+
+      function trackLandingClick(source, extra) {
+        if (!landingApiBase || !landingApiKey) return Promise.resolve();
+
+        return fetch(landingApiBase + '/api/landing-phone-click/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-API-KEY': landingApiKey,
+          },
+          body: JSON.stringify(Object.assign({
+            phone_number: '+14696190747',
+            source: source,
+            page_url: window.location.href,
+          }, extra || {})),
+          keepalive: true,
+        }).catch(function() {});
+      }
+
+      function prepareNavigation(anchor, href, event) {
+        const opensNewTab =
+          anchor.target === '_blank' ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.button === 1;
+
+        if (opensNewTab) {
+          const nextWindow = window.open('', '_blank', 'noopener,noreferrer');
+          if (nextWindow) {
+            nextWindow.opener = null;
+            return function() {
+              nextWindow.location = href;
+            };
+          }
+        }
+
+        return function() {
+          window.location.href = href;
+        };
+      }
+
+      async function waitBrieflyForTracking(promise) {
+        await Promise.race([
+          promise,
+          new Promise(function(resolve) {
+            window.setTimeout(resolve, TRACKING_NAVIGATION_TIMEOUT_MS);
+          }),
+        ]);
+      }
+
       document.addEventListener('click', function(e) {
         const target = e.target.closest('a');
         if (!target) return;
         const href = target.href || "";
-        const landingApiBase = (apiUrl || estimatorApiUrl || 'https://crm.cayadservices.com').replace(/\/+$/, '');
-        const landingApiKey = apiKey || 'test';
-
-        function trackLandingClick(source, extra) {
-          if (!landingApiBase || !landingApiKey) return;
-          fetch(landingApiBase + '/api/landing-phone-click/', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-API-KEY': landingApiKey,
-            },
-            body: JSON.stringify(Object.assign({
-              phone_number: '+14696190747',
-              source: source,
-              page_url: window.location.href,
-            }, extra || {})),
-            keepalive: true,
-          }).catch(function() {});
-        }
+        let trackingPromise = null;
 
         // Seguimiento unificado hacia GA4 (Google Ads importará desde aquí)
         if (href.includes('wa.me') || href.includes('whatsapp.com')) {
-          if (typeof gtag === 'function') gtag('event', 'click_whatsapp');
-          trackLandingClick('landing_whatsapp', { target_url: href });
+          pushMarketingEvent('click_whatsapp', { target_url: href });
+          trackingPromise = trackLandingClick('landing_whatsapp', { target_url: href });
         }
         else if (href.includes('m.me')) {
-          if (typeof gtag === 'function') gtag('event', 'click_messenger');
-          trackLandingClick('landing_messenger', { target_url: href });
+          pushMarketingEvent('click_messenger', { target_url: href });
+          trackingPromise = trackLandingClick('landing_messenger', { target_url: href });
         }
         else if (href.startsWith('tel:')) {
-          if (typeof gtag === 'function') gtag('event', 'click_call');
-          trackLandingClick('landing_call', {
+          pushMarketingEvent('click_call', { phone_number: href.replace('tel:', '').trim(), target_url: href });
+          trackingPromise = trackLandingClick('landing_call', {
             phone_number: href.replace('tel:', '').trim(),
             target_url: href,
           });
         }
+
+        if (!trackingPromise) return;
+
+        e.preventDefault();
+        const continueNavigation = prepareNavigation(target, href, e);
+        waitBrieflyForTracking(trackingPromise).finally(function() {
+          continueNavigation();
+        });
       });
 
       // Seguimiento de Formulario
       document.addEventListener('submit', function(e) {
-        gtag('event', 'submit_quote');
+        pushMarketingEvent('submit_quote');
       });
 
       // Función de compra (Purchase) Estándar para GA4
       window.trackPurchase = function(value, transaction_id) {
-        gtag('event', 'purchase', {
+        pushMarketingEvent('purchase', {
           'transaction_id': transaction_id || 'T_' + new Date().getTime(),
           'value': value || 50.0,
           'currency': 'USD',
