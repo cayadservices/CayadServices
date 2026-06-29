@@ -18,8 +18,15 @@ export type LandingCreateResponse = {
 export async function sendLeadToLanding(input: LandingFormInput): Promise<LandingCreateResponse> {
   // Try to capture client public IP but don't block lead submission if it fails
   const ip = await getPublicIP().catch(() => null);
+  const marketingAttribution =
+    typeof window !== 'undefined' && typeof (window as any).getCayadMarketingAttribution === 'function'
+      ? (window as any).getCayadMarketingAttribution({ channel: 'lead_form' })
+      : undefined;
   const payload = {
-    ...buildLandingPayloadWithRoute(input),
+    ...buildLandingPayloadWithRoute({
+      ...input,
+      ...(marketingAttribution ? { marketing_attribution: marketingAttribution } : {}),
+    }),
     ...(ip ? { client_ip: ip } : {}),
     auto_convert: true,
     landing_source: "landing_form",

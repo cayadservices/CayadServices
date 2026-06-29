@@ -6,6 +6,85 @@
   const landingApiBase = (apiUrl || estimatorApiUrl || 'https://crm.cayadservices.com').replace(/\/+$/, '');
   const landingApiKey = apiKey || 'test';
   const TRACKING_NAVIGATION_TIMEOUT_MS = 350;
+  const ATTRIBUTION_STORAGE_KEY = 'cayad_marketing_attribution';
+  const ATTRIBUTION_PARAMS = [
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_id',
+    'utm_term',
+    'utm_content',
+    'campaign_id',
+    'campaignid',
+    'ad_group',
+    'ad_group_id',
+    'adgroupid',
+    'ad_name',
+    'ad_id',
+    'creative',
+    'creative_id',
+    'gclid',
+    'gbraid',
+    'wbraid',
+    'fbclid'
+  ];
+
+  function readStoredAttribution() {
+    try {
+      return JSON.parse(window.localStorage.getItem(ATTRIBUTION_STORAGE_KEY) || '{}') || {};
+    } catch (_) {
+      return {};
+    }
+  }
+
+  function captureAttribution() {
+    const params = new URLSearchParams(window.location.search);
+    const current = {};
+    ATTRIBUTION_PARAMS.forEach(function(key) {
+      const value = params.get(key);
+      if (value) current[key] = value;
+    });
+
+    const stored = readStoredAttribution();
+    const next = Object.assign({}, stored, current, {
+      landing_page: window.location.href,
+      referrer: document.referrer || stored.referrer || '',
+    });
+
+    if (Object.keys(current).length > 0 || !stored.landing_page) {
+      try {
+        window.localStorage.setItem(ATTRIBUTION_STORAGE_KEY, JSON.stringify(next));
+      } catch (_) {}
+    }
+    return next;
+  }
+
+  function getMarketingAttribution(extra) {
+    return Object.assign({}, readStoredAttribution(), extra || {});
+  }
+
+  function buildMessengerHref(href) {
+    const attr = getMarketingAttribution();
+    if (!attr || !(attr.gclid || attr.fbclid || attr.utm_campaign || attr.campaign_id || attr.campaignid || attr.ad_id || attr.creative)) {
+      return href;
+    }
+    try {
+      const url = new URL(href);
+      const existingRef = url.searchParams.get('ref') || 'Hello_Cayad_Team_I_want_to_ship_my_car';
+      const compact = btoa(unescape(encodeURIComponent(JSON.stringify(attr))))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/g, '')
+        .slice(0, 420);
+      url.searchParams.set('ref', existingRef.split('__mk_')[0] + '__mk_' + compact);
+      return url.toString();
+    } catch (_) {
+      return href;
+    }
+  }
+
+  captureAttribution();
+  window.getCayadMarketingAttribution = getMarketingAttribution;
 
   function pushMarketingEvent(eventName, params) {
     const payload = Object.assign({ event: eventName }, params || {});
@@ -17,12 +96,20 @@
   function trackLandingClick(source, extra) {
     if (!landingApiBase || !landingApiKey) return Promise.resolve();
 
+    const attribution = getMarketingAttribution({
+      channel: {
+        landing_whatsapp: 'whatsapp',
+        landing_messenger: 'messenger',
+        landing_call: 'calls',
+        landing_form: 'lead_form'
+      }[source] || source
+    });
     const payload = Object.assign({
       api_key: landingApiKey,
       phone_number: '+14696190747',
       source: source,
       page_url: window.location.href,
-    }, extra || {});
+    }, attribution, extra || {});
     const endpoint = landingApiBase + '/api/landing-phone-click/';
 
     if (navigator.sendBeacon) {
@@ -81,7 +168,7 @@
   document.addEventListener('click', function(e) {
     const target = e.target.closest('a');
     if (!target) return;
-    const href = target.href || "";
+    let href = target.href || "";
     let trackingPromise = null;
 
     if (href.includes('wa.me') || href.includes('whatsapp.com')) {
@@ -89,6 +176,7 @@
       trackingPromise = trackLandingClick('landing_whatsapp', { target_url: href });
     }
     else if (href.includes('m.me')) {
+      href = buildMessengerHref(href);
       pushMarketingEvent('click_messenger', { target_url: href });
       trackingPromise = trackLandingClick('landing_messenger', { target_url: href });
     }
