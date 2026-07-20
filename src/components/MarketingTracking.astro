@@ -5,7 +5,6 @@
 }}>
   const landingApiBase = (apiUrl || estimatorApiUrl || 'https://crm.cayadservices.com').replace(/\/+$/, '');
   const landingApiKey = apiKey || 'test';
-  const TRACKING_NAVIGATION_TIMEOUT_MS = 350;
   const ATTRIBUTION_STORAGE_KEY = 'cayad_marketing_attribution';
   const ATTRIBUTION_PARAMS = [
     'utm_source',
@@ -133,38 +132,6 @@
     }).catch(function() {});
   }
 
-  function prepareNavigation(anchor, href, event) {
-    const opensNewTab =
-      anchor.target === '_blank' ||
-      event.metaKey ||
-      event.ctrlKey ||
-      event.shiftKey ||
-      event.button === 1;
-
-    if (opensNewTab) {
-      const nextWindow = window.open('', '_blank', 'noopener,noreferrer');
-      if (nextWindow) {
-        nextWindow.opener = null;
-        return function() {
-          nextWindow.location = href;
-        };
-      }
-    }
-
-    return function() {
-      window.location.href = href;
-    };
-  }
-
-  async function waitBrieflyForTracking(promise) {
-    await Promise.race([
-      promise,
-      new Promise(function(resolve) {
-        window.setTimeout(resolve, TRACKING_NAVIGATION_TIMEOUT_MS);
-      }),
-    ]);
-  }
-
   document.addEventListener('click', function(e) {
     const target = e.target.closest('a');
     if (!target) return;
@@ -177,6 +144,7 @@
     }
     else if (href.includes('m.me')) {
       href = buildMessengerHref(href);
+      target.href = href;
       pushMarketingEvent('click_messenger', { target_url: href });
       trackingPromise = trackLandingClick('landing_messenger', { target_url: href });
     }
@@ -190,11 +158,9 @@
 
     if (!trackingPromise) return;
 
-    e.preventDefault();
-    const continueNavigation = prepareNavigation(target, href, e);
-    waitBrieflyForTracking(trackingPromise).finally(function() {
-      continueNavigation();
-    });
+    // Do not delay or replace the browser's native navigation: doing so opens
+    // an intermediate about:blank tab in some browsers.
+    void trackingPromise;
   });
 
   document.addEventListener('submit', function() {
