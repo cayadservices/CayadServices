@@ -116,6 +116,30 @@ const currentYear = new Date().getFullYear();
   [data-footer-section] {
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
+
+  .bbb-seal {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    border-radius: 0.375rem;
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+  .bbb-seal:hover {
+    filter: brightness(1.12);
+    transform: translateY(-2px);
+  }
+
+  .bbb-seal:focus-visible {
+    outline: 2px solid #38bdf8;
+    outline-offset: 3px;
+  }
+
+  .bbb-seal img {
+    display: block;
+    height: 3.375rem;
+    width: auto;
+  }
 </style>
 
 <footer class:list={["relative bg-bg-footer text-light", minimal && "footer-minimal-mode"]}>
@@ -271,6 +295,19 @@ const currentYear = new Date().getFullYear();
             <script type="text/javascript">var ANS_customer_id = "40b07bd0-492e-41ef-af3d-203518035d55";</script>
             <script type="text/javascript" src="https://verify.authorize.net:443/anetseal/seal.js"></script>
           </div>
+
+          <a
+            href="https://www.bbb.org/us/fl/pace/profile/vehicle-transport/cayad-auto-transport-0683-90098385"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bbb-seal"
+            aria-label="View Cayad Auto Transport's Better Business Bureau profile"
+          >
+            <img
+              src="https://m.bbb.org/brand/seals/Accredited_Business_Seal_NoRating_RGB.svg?tx=w_175"
+              alt="BBB Accredited Business"
+            />
+          </a>
         </div>
       </div>
       ) : (
@@ -283,6 +320,20 @@ const currentYear = new Date().getFullYear();
             <script type="text/javascript">var ANS_customer_id = "40b07bd0-492e-41ef-af3d-203518035d55";</script>
             <script type="text/javascript" src="https://verify.authorize.net:443/anetseal/seal.js"></script>
           </div>
+          <a
+            href="https://www.bbb.org/us/fl/pace/profile/vehicle-transport/cayad-auto-transport-0683-90098385"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bbb-seal"
+            aria-label="View Cayad Auto Transport's Better Business Bureau profile"
+          >
+            <img
+              src="https://m.bbb.org/brand/seals/Accredited_Business_Seal_NoRating_RGB.svg?tx=w_175"
+              width="88"
+              height="54"
+              alt="BBB Accredited Business"
+            />
+          </a>
         </div>
       )}
   </div>
