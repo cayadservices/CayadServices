@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { getLead, getQuoteUrl, getSelectedPlan } from "../../services/localStorage";
 import { parseCityStateZip } from "../../utils/leadFormat";
-import { estimateTransitDays } from "../../services/distance";
+import { distanceForLocations, estimateTransitDays } from "../../services/distance";
 import {
     FaTruck,
     FaShieldAlt,
@@ -72,6 +72,7 @@ export default function Quote2ServiceSelector() {
     const [quoteUrl, setQuoteUrl] = useState<string | null>(null);
     const [isPremium, setIsPremium] = useState(true);
     const [loading, setLoading] = useState(true);
+    const [routeMiles, setRouteMiles] = useState<number | null>(null);
 
     // Initial Load
     useEffect(() => {
@@ -93,7 +94,34 @@ export default function Quote2ServiceSelector() {
     }, [lead]);
 
     const transportTypeLabel = lead?.transport_type === '2' ? 'Enclosed Transport' : 'Open Transport';
-    const miles = lead?.client_estimate?.miles ?? 0;
+    const savedMiles = Number(lead?.client_estimate?.miles);
+    const miles = Number.isFinite(savedMiles) && savedMiles > 0 ? savedMiles : routeMiles;
+
+    // Quotes created while distance is still loading can reach this page without
+    // client_estimate.miles. Recalculate from the route so the customer never
+    // loses the mileage and the transit estimate shown in the CRM.
+    useEffect(() => {
+        if (Number.isFinite(savedMiles) && savedMiles > 0) {
+            setRouteMiles(null);
+            return;
+        }
+
+        const routeOrigin = lead?.origin_city?.trim();
+        const routeDestination = lead?.destination_city?.trim();
+        if (!routeOrigin || !routeDestination) {
+            setRouteMiles(null);
+            return;
+        }
+
+        let active = true;
+        setRouteMiles(null);
+        distanceForLocations(routeOrigin, routeDestination).then((distance) => {
+            if (active) setRouteMiles(distance.miles ?? null);
+        });
+        return () => {
+            active = false;
+        };
+    }, [lead?.origin_city, lead?.destination_city, savedMiles]);
 
     // Calculate prices
     const discountedTotal = lead?.client_estimate?.discounted_total ?? lead?.client_estimate?.total ?? null;
@@ -105,6 +133,11 @@ export default function Quote2ServiceSelector() {
         if (lead?.client_estimate?.transit) return lead.client_estimate.transit;
         return estimateTransitDays(miles);
     }, [lead?.client_estimate?.transit, miles]);
+    const transitDisplay = transitTime
+        ? /\(estimate\)\s*$/i.test(transitTime)
+            ? transitTime
+            : `${transitTime} (estimate)`
+        : '---';
 
     // MODIFICADO: Función con tracking para GTM
     const handleVerifyCard = () => {
@@ -187,7 +220,7 @@ export default function Quote2ServiceSelector() {
 
                                     {/* Distance Pill */}
                                     <div className="self-center bg-slate-50 border border-slate-200 px-3 py-1 rounded-full shadow-sm z-20">
-                                        <span className="text-xs md:text-sm font-bold text-slate-700 whitespace-nowrap">{miles > 0 ? miles.toLocaleString() : '---'} <span className="font-normal text-slate-500">mi</span></span>
+                                        <span className="text-xs md:text-sm font-bold text-slate-700 whitespace-nowrap">{miles ? Math.round(miles).toLocaleString() : '---'} <span className="font-normal text-slate-500">mi</span></span>
                                     </div>
 
                                     {/* Destination */}
@@ -219,7 +252,7 @@ export default function Quote2ServiceSelector() {
                                 </div>
                                 <div className="flex flex-col gap-1">
                                     <span className="text-xs text-slate-400 font-bold uppercase flex items-center gap-1"><FaClock /> Transit</span>
-                                    <span className="text-sm font-semibold text-slate-700">{transitTime || '---'}</span>
+                                    <span className="text-sm font-semibold text-slate-700">{transitDisplay}</span>
                                 </div>
                             </div>
                         </div>
