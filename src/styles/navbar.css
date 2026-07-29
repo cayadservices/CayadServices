@@ -22,6 +22,21 @@
     align-items: center;
     gap: 1.5rem;
   }
+
+  /* Spanish navigation uses longer labels. Keep it elegant at desktop width
+     without allowing labels or the call button to wrap. */
+  .navbar-desktop-menu--spanish {
+    gap: 0.875rem;
+  }
+
+  .navbar-desktop-menu--spanish .navbar-navigation-link {
+    font-size: 0.8125rem;
+    letter-spacing: -0.012em;
+  }
+
+  .navbar-phone-link {
+    white-space: nowrap;
+  }
 }
 
 /* Quote page navbar responsive styles */

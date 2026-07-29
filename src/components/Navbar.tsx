@@ -214,8 +214,8 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
           scrolled ? "bg-white/95 backdrop-blur-md shadow-md py-2" : "bg-white py-4"
         )}
       >
-        <nav className="mx-auto flex w-full items-center justify-between px-4 sm:px-6 lg:px-8" aria-label="Global">
-          <div className="flex items-center gap-4">
+        <nav className={classNames('mx-auto flex w-full items-center justify-between', locale === 'es' ? 'px-3 sm:px-4 lg:px-5' : 'px-4 sm:px-6 lg:px-8')} aria-label="Global">
+          <div className="flex flex-none items-center gap-4">
             {!isCleanMode && (
               <div className="navbar-mobile-btn">
                 <button
@@ -274,11 +274,11 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
           )}
 
           {!isCleanMode && (
-            <div className="navbar-desktop-menu">
+            <div className={classNames('navbar-desktop-menu', locale === 'es' && 'navbar-desktop-menu--spanish')}>
               <Popover className="relative" onMouseEnter={() => setOpenPopover('how-it-work')} onMouseLeave={() => setOpenPopover(null)}>
                 <Popover.Button className={classNames(
                   isPopoverHowItWorkActive ? 'text-[#00a1e1]' : 'text-slate-800',
-                  "flex items-center gap-x-1 text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors focus:outline-none whitespace-nowrap"
+                  "navbar-navigation-link flex items-center gap-x-1 text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors focus:outline-none whitespace-nowrap"
                 )}>
                   {navText('HOW IT WORKS')}
                   <ChevronDownIcon className={classNames(openPopover === 'how-it-work' ? 'rotate-180' : '', "h-5 w-5 flex-none text-slate-400 transition-transform duration-200")} aria-hidden="true" />
@@ -316,7 +316,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
               <Popover className="relative" onMouseEnter={() => setOpenPopover('individuals')} onMouseLeave={() => setOpenPopover(null)}>
                 <Popover.Button className={classNames(
                   isPopoverIndividualsActive ? 'text-[#00a1e1]' : 'text-slate-800',
-                  "flex items-center gap-x-1 text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors focus:outline-none whitespace-nowrap"
+                  "navbar-navigation-link flex items-center gap-x-1 text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors focus:outline-none whitespace-nowrap"
                 )}>
                   {navText('FOR INDIVIDUALS')}
                   <ChevronDownIcon className={classNames(openPopover === 'individuals' ? 'rotate-180' : '', "h-5 w-5 flex-none text-slate-400 transition-transform duration-200")} aria-hidden="true" />
@@ -365,7 +365,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
               <Popover className="relative" onMouseEnter={() => setOpenPopover('businesses')} onMouseLeave={() => setOpenPopover(null)}>
                 <Popover.Button className={classNames(
                   isPopoverBusinessesActive ? 'text-[#00a1e1]' : 'text-slate-800',
-                  "flex items-center gap-x-1 text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors focus:outline-none whitespace-nowrap"
+                  "navbar-navigation-link flex items-center gap-x-1 text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors focus:outline-none whitespace-nowrap"
                 )}>
                   {navText('FOR BUSINESSES')}
                   <ChevronDownIcon className={classNames(openPopover === 'businesses' ? 'rotate-180' : '', "h-5 w-5 flex-none text-slate-400 transition-transform duration-200")} aria-hidden="true" />
@@ -403,7 +403,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
               <Popover className="relative" onMouseEnter={() => setOpenPopover('whyUs')} onMouseLeave={() => setOpenPopover(null)}>
                 <Popover.Button className={classNames(
                   isPopoverWhyUsActive ? 'text-[#00a1e1]' : 'text-slate-800',
-                  "flex items-center gap-x-1 text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors focus:outline-none whitespace-nowrap"
+                  "navbar-navigation-link flex items-center gap-x-1 text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors focus:outline-none whitespace-nowrap"
                 )}>
                   {navText('COMPANY')}
                   <ChevronDownIcon className={classNames(openPopover === 'whyUs' ? 'rotate-180' : '', "h-5 w-5 flex-none text-slate-400 transition-transform duration-200")} aria-hidden="true" />
@@ -438,16 +438,16 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                 </Transition>
               </Popover>
 
-              <a href="/faqs/" className={classNames(currentPath === '/faqs/' ? 'text-[#00a1e1]' : 'text-slate-800', "text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors")}>
+              <a href="/faqs/" className={classNames(currentPath === '/faqs/' ? 'text-[#00a1e1]' : 'text-slate-800', "navbar-navigation-link whitespace-nowrap text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors")}>
                 {navText('FAQS')}
               </a>
-              <a href="/contact" className={classNames(currentPath === '/contact' ? 'text-btn-blue' : '', "text-sm font-semibold leading-6 text-slate-800 hover:text-[#00a1e1] transition-colors")}>
+              <a href="/contact" className={classNames(currentPath === '/contact' ? 'text-btn-blue' : '', "navbar-navigation-link whitespace-nowrap text-sm font-semibold leading-6 text-slate-800 hover:text-[#00a1e1] transition-colors")}>
                 {navText('CONTACT')}
               </a>
 
               {languageToggle}
 
-              <div className="flex items-center pl-4 border-l border-slate-200 ml-4 gap-2">
+              <div className="ml-2 flex flex-none items-center gap-2 border-l border-slate-200 pl-3">
                 <div className="flex items-center gap-2 mr-2">
                   <a
                     href="tel:+14696190747"
@@ -481,7 +481,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
 
                 <a
                   href="tel:+14696190747"
-                  className="group flex items-center gap-2 rounded-full bg-[#00a1e1] px-5 py-2.5 text-white shadow-md transition-all duration-300 hover:bg-[#008cc3] hover:shadow-lg hover:-translate-y-0.5"
+                  className="navbar-phone-link group flex flex-none items-center gap-2 rounded-full bg-[#00a1e1] px-4 py-2.5 text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#008cc3] hover:shadow-lg"
                 >
                   <PhoneIcon className="h-4 w-4 text-white group-hover:animate-pulse" />
                   <span className="text-sm font-bold tracking-wide">(469) 619-0747</span>
