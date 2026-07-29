@@ -244,7 +244,6 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
 
           {!isCleanMode && (
             <div className="flex lg:hidden items-center gap-2">
-              {languageToggle}
               <a
                 href="tel:+14696190747"
                 className="h-9 w-9 flex items-center justify-center rounded-md bg-[#005c85] text-white shadow-sm hover:bg-[#004a6b] transition-all active:scale-95"
