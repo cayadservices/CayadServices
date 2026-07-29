@@ -75,6 +75,39 @@ const whyUs = [
   { description: 'Our team', href: '/why-us/our-team/', icon: FaUsers },
 ]
 
+const NAV_TRANSLATIONS: Record<string, string> = {
+  'HOW IT WORKS': 'CÓMO FUNCIONA',
+  'FOR INDIVIDUALS': 'PARA PARTICULARES',
+  'FOR BUSINESSES': 'PARA EMPRESAS',
+  'COMPANY': 'COMPAÑÍA',
+  'FAQS': 'PREGUNTAS FRECUENTES',
+  'CONTACT': 'CONTACTO',
+  'Services': 'Servicios',
+  'Who We Serve': 'A quién servimos',
+  'Language': 'Idioma',
+  'How To Ship a Car': 'Cómo enviar un automóvil',
+  'Car Shipping Cost': 'Costo de envío de auto',
+  'Cross country car shipping': 'Envío de auto a través del país',
+  'Door to door transport': 'Transporte puerta a puerta',
+  'Open car transport': 'Transporte de auto abierto',
+  'Enclosed auto transport': 'Transporte de auto cerrado',
+  'Motorcycle shipping': 'Envío de motocicletas',
+  'Online car buyers': 'Compradores de autos en línea',
+  'College students': 'Estudiantes universitarios',
+  'Snowbirds': 'Residentes estacionales',
+  'Classic car shipping': 'Envío de autos clásicos',
+  'Car resellers shipping': 'Envío para revendedores de autos',
+  'Military': 'Militares',
+  'Ship cars to another state': 'Enviar autos a otro estado',
+  'Auto dealerships': 'Concesionarios de autos',
+  'Auto auctions': 'Subastas de autos',
+  'Heavy haul': 'Transporte pesado',
+  'About Us': 'Sobre nosotros',
+  'Reviews': 'Reseñas',
+  'Growth': 'Crecimiento',
+  'Our team': 'Nuestro equipo',
+}
+
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
@@ -116,6 +149,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
     window.localStorage.setItem('cayad.services.locale', nextLocale);
     window.dispatchEvent(new CustomEvent('cayad-language-change', { detail: nextLocale }));
   };
+  const navText = (value: string) => locale === 'es' ? NAV_TRANSLATIONS[value] || value : value;
 
   const languageToggle = (
     <div data-no-ui-translate className="inline-flex items-center overflow-hidden rounded-full border border-slate-200 bg-slate-50 p-0.5 shadow-sm" aria-label={locale === 'en' ? 'Change language' : 'Cambiar idioma'}>
@@ -212,7 +246,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                   isPopoverHowItWorkActive ? 'text-[#00a1e1]' : 'text-slate-800',
                   "flex items-center gap-x-1 text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors focus:outline-none whitespace-nowrap"
                 )}>
-                  HOW IT WORKS
+                  {navText('HOW IT WORKS')}
                   <ChevronDownIcon className={classNames(openPopover === 'how-it-work' ? 'rotate-180' : '', "h-5 w-5 flex-none text-slate-400 transition-transform duration-200")} aria-hidden="true" />
                 </Popover.Button>
 
@@ -234,7 +268,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                           </div>
                           <div className="flex-auto">
                             <a href={item.href} className="block font-semibold text-slate-900 group-hover:text-[#00a1e1]">
-                              {item.description}
+                              {navText(item.description)}
                               <span className="absolute inset-0" />
                             </a>
                           </div>
@@ -250,7 +284,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                   isPopoverIndividualsActive ? 'text-[#00a1e1]' : 'text-slate-800',
                   "flex items-center gap-x-1 text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors focus:outline-none whitespace-nowrap"
                 )}>
-                  FOR INDIVIDUALS
+                  {navText('FOR INDIVIDUALS')}
                   <ChevronDownIcon className={classNames(openPopover === 'individuals' ? 'rotate-180' : '', "h-5 w-5 flex-none text-slate-400 transition-transform duration-200")} aria-hidden="true" />
                 </Popover.Button>
 
@@ -266,24 +300,24 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                   <Popover.Panel static className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-xl bg-white shadow-xl ring-1 ring-slate-900/5">
                     <div className="grid grid-cols-2 divide-x divide-slate-100">
                       <div className="p-2">
-                        <div className="px-3 py-2 text-xs font-bold text-[#00a1e1] uppercase tracking-wider">Services</div>
+                        <div className="px-3 py-2 text-xs font-bold text-[#00a1e1] uppercase tracking-wider">{navText('Services')}</div>
                         {weOffer.map((item) => (
                           <div key={item.description} className="group relative flex items-center gap-x-3 rounded-lg p-2 text-sm leading-6 hover:bg-slate-50 transition-colors">
                             <item.icon className="h-5 w-5 flex-none text-slate-400 group-hover:text-[#00a1e1]" aria-hidden="true" />
                             <a href={item.href} className="block font-medium text-slate-900 group-hover:text-[#00a1e1]">
-                              {item.description}
+                              {navText(item.description)}
                               <span className="absolute inset-0" />
                             </a>
                           </div>
                         ))}
                       </div>
                       <div className="p-2 bg-slate-50/50">
-                        <div className="px-3 py-2 text-xs font-bold text-[#00a1e1] uppercase tracking-wider">Who We Serve</div>
+                        <div className="px-3 py-2 text-xs font-bold text-[#00a1e1] uppercase tracking-wider">{navText('Who We Serve')}</div>
                         {weServe.map((item) => (
                           <div key={item.description} className="group relative flex items-center gap-x-3 rounded-lg p-2 text-sm leading-6 hover:bg-slate-50 transition-colors">
                             <item.icon className="h-5 w-5 flex-none text-slate-400 group-hover:text-[#00a1e1]" aria-hidden="true" />
                             <a href={item.href} className="block font-medium text-slate-900 group-hover:text-[#00a1e1]">
-                              {item.description}
+                              {navText(item.description)}
                               <span className="absolute inset-0" />
                             </a>
                           </div>
@@ -299,7 +333,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                   isPopoverBusinessesActive ? 'text-[#00a1e1]' : 'text-slate-800',
                   "flex items-center gap-x-1 text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors focus:outline-none whitespace-nowrap"
                 )}>
-                  FOR BUSINESSES
+                  {navText('FOR BUSINESSES')}
                   <ChevronDownIcon className={classNames(openPopover === 'businesses' ? 'rotate-180' : '', "h-5 w-5 flex-none text-slate-400 transition-transform duration-200")} aria-hidden="true" />
                 </Popover.Button>
 
@@ -321,7 +355,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                           </div>
                           <div className="flex-auto">
                             <a href={item.href} className="block font-semibold text-slate-900 group-hover:text-[#00a1e1]">
-                              {item.description}
+                              {navText(item.description)}
                               <span className="absolute inset-0" />
                             </a>
                           </div>
@@ -337,7 +371,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                   isPopoverWhyUsActive ? 'text-[#00a1e1]' : 'text-slate-800',
                   "flex items-center gap-x-1 text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors focus:outline-none whitespace-nowrap"
                 )}>
-                  COMPANY
+                  {navText('COMPANY')}
                   <ChevronDownIcon className={classNames(openPopover === 'whyUs' ? 'rotate-180' : '', "h-5 w-5 flex-none text-slate-400 transition-transform duration-200")} aria-hidden="true" />
                 </Popover.Button>
 
@@ -359,7 +393,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                           </div>
                           <div className="flex-auto">
                             <a href={item.href} className="block font-semibold text-slate-900 group-hover:text-[#00a1e1]">
-                              {item.description}
+                              {navText(item.description)}
                               <span className="absolute inset-0" />
                             </a>
                           </div>
@@ -371,10 +405,10 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
               </Popover>
 
               <a href="/faqs/" className={classNames(currentPath === '/faqs/' ? 'text-[#00a1e1]' : 'text-slate-800', "text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors")}>
-                FAQS
+                {navText('FAQS')}
               </a>
               <a href="/contact" className={classNames(currentPath === '/contact' ? 'text-btn-blue' : '', "text-sm font-semibold leading-6 text-slate-800 hover:text-[#00a1e1] transition-colors")}>
-                CONTACT
+                {navText('CONTACT')}
               </a>
 
               {languageToggle}
@@ -447,7 +481,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                 <div className="space-y-2 py-6 flex-1">
                   <div className="px-3 pb-4" data-no-ui-translate>
                     <div className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2">
-                      <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Language</span>
+                      <span className="text-xs font-bold uppercase tracking-wider text-slate-500">{navText('Language')}</span>
                       {languageToggle}
                     </div>
                   </div>
@@ -456,13 +490,13 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                     {({ open }) => (
                       <>
                         <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-slate-900 hover:bg-slate-50 hover:text-[#00a1e1]">
-                          HOW IT WORKS
+                          {navText('HOW IT WORKS')}
                           <ChevronDownIcon className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none transition-transform')} aria-hidden="true" />
                         </Disclosure.Button>
                         <Disclosure.Panel className="mt-2 space-y-1 pl-4">
                           {howItWork.map((item) => (
                             <Disclosure.Button key={item.description} as="a" href={item.href} className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-slate-600 hover:bg-slate-50 hover:text-[#00a1e1]">
-                              {item.description}
+                              {navText(item.description)}
                             </Disclosure.Button>
                           ))}
                         </Disclosure.Panel>
@@ -474,20 +508,20 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                     {({ open }) => (
                       <>
                         <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-slate-900 hover:bg-slate-50 hover:text-[#00a1e1]">
-                          FOR INDIVIDUALS
+                          {navText('FOR INDIVIDUALS')}
                           <ChevronDownIcon className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none transition-transform')} aria-hidden="true" />
                         </Disclosure.Button>
                         <Disclosure.Panel className="mt-2 space-y-1 pl-4">
-                          <div className="px-3 py-1 text-xs font-bold text-[#00a1e1] uppercase">Services</div>
+                          <div className="px-3 py-1 text-xs font-bold text-[#00a1e1] uppercase">{navText('Services')}</div>
                           {weOffer.map((item) => (
                             <Disclosure.Button key={item.description} as="a" href={item.href} className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-slate-600 hover:bg-slate-50 hover:text-[#00a1e1]">
-                              {item.description}
+                              {navText(item.description)}
                             </Disclosure.Button>
                           ))}
-                          <div className="px-3 py-1 mt-2 text-xs font-bold text-[#00a1e1] uppercase">Who We Serve</div>
+                          <div className="px-3 py-1 mt-2 text-xs font-bold text-[#00a1e1] uppercase">{navText('Who We Serve')}</div>
                           {weServe.map((item) => (
                             <Disclosure.Button key={item.description} as="a" href={item.href} className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-slate-600 hover:bg-slate-50 hover:text-[#00a1e1]">
-                              {item.description}
+                              {navText(item.description)}
                             </Disclosure.Button>
                           ))}
                         </Disclosure.Panel>
@@ -499,13 +533,13 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                     {({ open }) => (
                       <>
                         <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-slate-900 hover:bg-slate-50 hover:text-[#00a1e1]">
-                          FOR BUSINESSES
+                          {navText('FOR BUSINESSES')}
                           <ChevronDownIcon className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none transition-transform')} aria-hidden="true" />
                         </Disclosure.Button>
                         <Disclosure.Panel className="mt-2 space-y-1 pl-4">
                           {forBusinesses.map((item) => (
                             <Disclosure.Button key={item.description} as="a" href={item.href} className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-slate-600 hover:bg-slate-50 hover:text-[#00a1e1]">
-                              {item.description}
+                              {navText(item.description)}
                             </Disclosure.Button>
                           ))}
                         </Disclosure.Panel>
@@ -517,13 +551,13 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                     {({ open }) => (
                       <>
                         <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-slate-900 hover:bg-slate-50 hover:text-[#00a1e1]">
-                          COMPANY
+                          {navText('COMPANY')}
                           <ChevronDownIcon className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none transition-transform')} aria-hidden="true" />
                         </Disclosure.Button>
                         <Disclosure.Panel className="mt-2 space-y-1 pl-4">
                           {whyUs.map((item) => (
                             <Disclosure.Button key={item.description} as="a" href={item.href} className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-slate-600 hover:bg-slate-50 hover:text-[#00a1e1]">
-                              {item.description}
+                              {navText(item.description)}
                             </Disclosure.Button>
                           ))}
                         </Disclosure.Panel>
@@ -532,10 +566,10 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                   </Disclosure>
 
                   <a href="/faqs/" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-slate-900 hover:bg-slate-50 hover:text-[#00a1e1]">
-                    FAQS
+                    {navText('FAQS')}
                   </a>
                   <a href="/contact" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-slate-900 hover:bg-slate-50 hover:text-[#00a1e1]">
-                    CONTACT
+                    {navText('CONTACT')}
                   </a>
 
                   <div className="mt-4 pt-4 border-t border-slate-100">
