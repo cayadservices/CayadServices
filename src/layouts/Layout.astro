@@ -4,7 +4,6 @@ import Footer from "../components/Footer.astro";
 import MarketingTracking from "../components/MarketingTracking.astro";
 import SocialProofMini from "../components/SocialProofMini";
 import ShareButton from "../components/ShareButton.astro"; 
-import SiteLanguageController from "../components/SiteLanguageController";
 import "aos/dist/aos.css";
 import "../styles/animate.css";
 
@@ -95,7 +94,6 @@ const { title, content, isLanding = false } = Astro.props;
     </noscript>
 
     <Navbar client:load />
-    <SiteLanguageController client:load />
     
     <main class={isLanding ? "" : "pt-[72px] sm:pt-[80px]"}>
       <slot />
