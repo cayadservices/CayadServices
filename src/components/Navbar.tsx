@@ -89,12 +89,14 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
   const [currentPath, setCurrentPath] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const [isFunnelMode, setIsFunnelMode] = useState(false);
+  const [locale, setLocale] = useState<'en' | 'es'>('en');
 
   // AÑO DINÁMICO
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
     setCurrentPath(window.location.pathname);
+    setLocale(window.localStorage.getItem('cayad.services.locale') === 'es' ? 'es' : 'en');
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
 
@@ -108,6 +110,19 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
       window.removeEventListener('navbar-funnel-mode', handleFunnelMode as EventListener);
     };
   }, []);
+
+  const changeLocale = (nextLocale: 'en' | 'es') => {
+    setLocale(nextLocale);
+    window.localStorage.setItem('cayad.services.locale', nextLocale);
+    window.dispatchEvent(new CustomEvent('cayad-language-change', { detail: nextLocale }));
+  };
+
+  const languageToggle = (
+    <div data-no-ui-translate className="inline-flex items-center overflow-hidden rounded-full border border-slate-200 bg-slate-50 p-0.5 shadow-sm" aria-label={locale === 'en' ? 'Change language' : 'Cambiar idioma'}>
+      <button type="button" onClick={() => changeLocale('en')} aria-pressed={locale === 'en'} className={classNames('rounded-full px-2 py-1 text-[11px] font-extrabold tracking-wide transition-colors', locale === 'en' ? 'bg-[#005c85] text-white shadow-sm' : 'text-slate-500 hover:text-[#005c85]')}>EN</button>
+      <button type="button" onClick={() => changeLocale('es')} aria-pressed={locale === 'es'} className={classNames('rounded-full px-2 py-1 text-[11px] font-extrabold tracking-wide transition-colors', locale === 'es' ? 'bg-[#005c85] text-white shadow-sm' : 'text-slate-500 hover:text-[#005c85]')}>ES</button>
+    </div>
+  );
 
   const isCleanMode = cleanMode || isFunnelMode;
   const isActive = (path: string) => currentPath.startsWith(path);
@@ -161,6 +176,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
 
           {!isCleanMode && (
             <div className="flex lg:hidden items-center gap-2">
+              {languageToggle}
               <a
                 href="tel:+14696190747"
                 className="h-9 w-9 flex items-center justify-center rounded-md bg-[#005c85] text-white shadow-sm hover:bg-[#004a6b] transition-all active:scale-95"
@@ -361,6 +377,8 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
                 CONTACT
               </a>
 
+              {languageToggle}
+
               <div className="flex items-center pl-4 border-l border-slate-200 ml-4 gap-2">
                 <div className="flex items-center gap-2 mr-2">
                   <a
@@ -403,6 +421,7 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
               </div>
             </div>
           )}
+          {isCleanMode && <div className="flex items-center">{languageToggle}</div>}
         </nav >
 
         {/* Mobile menu */}
@@ -426,6 +445,12 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-slate-100 flex flex-col min-h-[calc(100vh-80px)]">
                 <div className="space-y-2 py-6 flex-1">
+                  <div className="px-3 pb-4" data-no-ui-translate>
+                    <div className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Language</span>
+                      {languageToggle}
+                    </div>
+                  </div>
 
                   <Disclosure as="div" className="-mx-3">
                     {({ open }) => (
