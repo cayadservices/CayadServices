@@ -8,8 +8,9 @@ import {
 import {
   Bars3Icon,
   XMarkIcon,
+  GlobeAltIcon,
 } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, PhoneIcon } from '@heroicons/react/20/solid'
+import { CheckIcon, ChevronDownIcon, PhoneIcon } from '@heroicons/react/20/solid'
 import {
   FaTruck,
   FaShieldAlt,
@@ -152,10 +153,43 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
   const navText = (value: string) => locale === 'es' ? NAV_TRANSLATIONS[value] || value : value;
 
   const languageToggle = (
-    <div data-no-ui-translate className="inline-flex items-center overflow-hidden rounded-full border border-slate-200 bg-slate-50 p-0.5 shadow-sm" aria-label={locale === 'en' ? 'Change language' : 'Cambiar idioma'}>
-      <button type="button" onClick={() => changeLocale('en')} aria-pressed={locale === 'en'} className={classNames('rounded-full px-2 py-1 text-[11px] font-extrabold tracking-wide transition-colors', locale === 'en' ? 'bg-[#005c85] text-white shadow-sm' : 'text-slate-500 hover:text-[#005c85]')}>EN</button>
-      <button type="button" onClick={() => changeLocale('es')} aria-pressed={locale === 'es'} className={classNames('rounded-full px-2 py-1 text-[11px] font-extrabold tracking-wide transition-colors', locale === 'es' ? 'bg-[#005c85] text-white shadow-sm' : 'text-slate-500 hover:text-[#005c85]')}>ES</button>
-    </div>
+    <Popover className="relative" data-no-ui-translate>
+      {({ open }) => (
+        <>
+          <Popover.Button
+            className={classNames(
+              'inline-flex h-10 w-10 items-center justify-center rounded-full border shadow-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00a1e1] focus-visible:ring-offset-2',
+              open ? 'border-[#00a1e1] bg-[#005c85] text-white shadow-md' : 'border-slate-200 bg-white text-[#005c85] hover:border-[#00a1e1] hover:bg-sky-50'
+            )}
+            aria-label={locale === 'en' ? 'Change language' : 'Cambiar idioma'}
+            title={locale === 'en' ? 'Language' : 'Idioma'}
+          >
+            <GlobeAltIcon className="h-5 w-5" aria-hidden="true" />
+          </Popover.Button>
+          <Transition
+            show={open}
+            enter="transition ease-out duration-150"
+            enterFrom="opacity-0 translate-y-1 scale-95"
+            enterTo="opacity-100 translate-y-0 scale-100"
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100 translate-y-0 scale-100"
+            leaveTo="opacity-0 translate-y-1 scale-95"
+          >
+            <Popover.Panel static className="absolute right-0 top-full z-50 mt-2 w-44 overflow-hidden rounded-xl border border-slate-100 bg-white p-1.5 shadow-xl ring-1 ring-slate-900/5">
+              <p className="px-3 pb-1 pt-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em] text-slate-400">{locale === 'en' ? 'Language' : 'Idioma'}</p>
+              <button type="button" onClick={() => changeLocale('en')} className={classNames('flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-bold transition-colors', locale === 'en' ? 'bg-sky-50 text-[#005c85]' : 'text-slate-600 hover:bg-slate-50')}>
+                <span>English</span>
+                {locale === 'en' && <CheckIcon className="h-4 w-4" aria-label="Selected" />}
+              </button>
+              <button type="button" onClick={() => changeLocale('es')} className={classNames('flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-bold transition-colors', locale === 'es' ? 'bg-sky-50 text-[#005c85]' : 'text-slate-600 hover:bg-slate-50')}>
+                <span>Español</span>
+                {locale === 'es' && <CheckIcon className="h-4 w-4" aria-label="Seleccionado" />}
+              </button>
+            </Popover.Panel>
+          </Transition>
+        </>
+      )}
+    </Popover>
   );
 
   const isCleanMode = cleanMode || isFunnelMode;
