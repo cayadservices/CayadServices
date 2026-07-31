@@ -971,13 +971,10 @@ export default function EstimatorQuote({ embedded = false }: { embedded?: boolea
         if (resp.quote_url) {
           saveQuoteUrl(resp.quote_url);
         }
-        showNotification({ text: "Success!", icon: "success" });
         saveLead?.(formatted as any);
         saveEmail?.({ ...(formatted as any), crm_lead_id: resp.id });
         saveSelectedPlan(isPremium); // Save selected plan for quote2 display
-        setTimeout(() => {
-          window.location.href = "/quote2";
-        }, 1200);
+        window.location.href = "/quote2";
       } else {
         showNotification({ text: "Error sending quote", icon: "error" });
         setSubmitting(false);
