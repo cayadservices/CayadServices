@@ -931,6 +931,74 @@
     "en": "8. WhatsApp Business API Specific Terms",
     "es": "8. Términos específicos de la API de WhatsApp Business"
   },
+  "8. WhatsApp Business API Specific Terms": {
+    "en": "8. WhatsApp Business API Specific Terms",
+    "es": "8. Términos específicos de la API de WhatsApp Business"
+},
+"8.1": {
+    "en": "When using our WhatsApp Business API integration, you additionally agree to:",
+    "es": "Al utilizar nuestra integración de API de WhatsApp Business, usted acepta adicionalmente:"
+},
+"8.1.a": {
+    "en": "Comply with WhatsApp's Business Policy and Meta's Terms of Service",
+    "es": "Cumplir con la Política Comercial de WhatsApp y los Términos de Servicio de Meta"
+},
+"8.1.b": {
+    "en": "Not send spam, misleading, or fraudulent messages through our service",
+    "es": "No enviar mensajes spam, engañosos o fraudulentos a través de nuestro servicio"
+},
+"8.1.c": {
+    "en": "Obtain proper consent from your customers before sending them messages",
+    "es": "Obtener el consentimiento adecuado de sus clientes antes de enviarles mensajes"
+},
+"8.1.d": {
+    "en": "Not use our WhatsApp integration for any illegal activities",
+    "es": "No utilizar nuestra integración de WhatsApp para actividades ilegales"
+},
+"8.1.e": {
+    "en": "Respect the 24-hour customer service window for free-form messaging",
+    "es": "Respetar la ventana de servicio al cliente de 24 horas para mensajes de formato libre"
+},
+"8.5 SMS/Text Messaging Terms": {
+    "en": "8.5 SMS/Text Messaging Terms",
+    "es": "8.5 Términos de Mensajería SMS/Texto"
+},
+"8.5.a": {
+    "en": "By providing your phone number and opting in to receive SMS messages from Cayad Services LLC, you agree to the following:",
+    "es": "Al proporcionar su número de teléfono y aceptar recibir mensajes SMS de Cayad Services LLC, usted acepta lo siguiente:"
+},
+"8.5.b": {
+    "en": "You consent to receive recurring automated promotional and informational text messages from Cayad Services LLC.",
+    "es": "Usted acepta recibir mensajes de texto promocionales e informativos recurrentes y automatizados de Cayad Services LLC."
+},
+"8.5.c": {
+    "en": "Message frequency may vary.",
+    "es": "La frecuencia de los mensajes puede variar."
+},
+"8.5.d": {
+    "en": "Message and data rates may apply.",
+    "es": "Pueden aplicarse tarifas por mensajes y datos."
+},
+"8.5.e": {
+    "en": "You may opt out at any time by replying STOP to any message you receive.",
+    "es": "Puede darse de baja en cualquier momento respondiendo STOP a cualquier mensaje que reciba."
+},
+"8.5.f": {
+    "en": "For help or assistance, reply HELP to any message you receive.",
+    "es": "Para ayuda o asistencia, responda HELP a cualquier mensaje que reciba."
+},
+"8.5.g": {
+    "en": "Your consent to receive SMS messages is not a condition of purchasing any products, goods, or services from Cayad Services LLC.",
+    "es": "Su consentimiento para recibir mensajes SMS no es una condición para comprar ningún producto, bien o servicio de Cayad Services LLC."
+},
+"8.5.h": {
+    "en": "We do not share your mobile information with third parties for marketing or promotional purposes. For more details, please see our Privacy Policy.",
+    "es": "No compartimos su información móvil con terceros para fines de marketing o promocionales. Para más detalles, consulte nuestra Política de Privacidad."
+},
+"8.5.i": {
+    "en": "We reserve the right to change or terminate our SMS program at any time.",
+    "es": "Nos reservamos el derecho de cambiar o terminar nuestro programa de SMS en cualquier momento."
+},
   "9. Third Party Services": {
     "en": "9. Third Party Services",
     "es": "9. Servicios de terceros"
@@ -8294,6 +8362,10 @@
   "We may disclose personal information and aggregate information about our users to advertisers and for our marketing and promotional purposes, including to determine the effectiveness of our promotional campaigns.": {
     "en": "We may disclose personal information and aggregate information about our users to advertisers and for our marketing and promotional purposes, including to determine the effectiveness of our promotional campaigns.",
     "es": "Podemos divulgar información personal e información agregada sobre nuestros usuarios a anunciantes y para nuestros fines promocionales y de marketing, incluso para determinar la efectividad de nuestras campañas promocionales."
+  },
+  "We may disclose personal information and aggregate information about our users to advertisers and for our marketing and promotional purposes, including to determine the effectiveness of our promotional campaigns.": {
+    "en": "Notwithstanding the foregoing, no mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All other categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.",
+    "es": "No obstante lo anterior, no se compartirá información móvil con terceros o afiliados para fines de marketing o promocionales. Todas las demás categorías excluyen los datos de consentimiento y registro de mensajes de texto; esta información no se compartirá con terceros"
   },
   "We may offer the ability to post messages on our Site. If you choose to post messages on our Site, we will collect such information about you as you may choose to disclose pursuant to your activities on the Site.": {
     "en": "We may offer the ability to post messages on our Site. If you choose to post messages on our Site, we will collect such information about you as you may choose to disclose pursuant to your activities on the Site.",

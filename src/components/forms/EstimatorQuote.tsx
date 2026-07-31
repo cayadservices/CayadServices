@@ -1730,16 +1730,36 @@ export default function EstimatorQuote({ embedded = false }: { embedded?: boolea
               <input type="text" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" {...(step4.register as any)("website")} />
 
               {/* Privacy Notice - more subtle */}
-              <div className="flex items-start gap-2 px-1">
+              {/* <div className="flex items-start gap-2 px-1">
                 <svg className="w-4 h-4 text-slate-300 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
                 <small className="text-[10px] text-slate-400 leading-relaxed">
-                  By providing your info and clicking through, you agree to our
+                  By checking this box, you consent to receive recurring automated promotional calls and text messages from Cayad Auto Transport. These communications may be delivered by an AI voice agent or other automated technology. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out or HELP for help. Consent is not required to make a purchase. View our
                   <a href="/pdfs/Terms-and-Conditions.pdf" className="text-sky-500 hover:underline mx-0.5">Terms</a>
                   and <a href="/privacy-policy/" className="text-sky-500 hover:underline">Privacy Policy</a>.
                 </small>
+              </div> */}
+
+                <div className="flex items-start gap-3 px-1">
+                <input
+                  type="checkbox"
+                  id="sms_consent"
+                  name="sms_consent"
+                  value="yes"
+                  required
+                  className="w-4 h-4 mt-0.5 shrink-0 accent-sky-600 cursor-pointer border-slate-300 rounded focus:ring-sky-500"
+                />
+                <label htmlFor="sms_consent" className="text-[10px] text-slate-400 leading-relaxed cursor-pointer select-none">
+                  By checking this box, you consent to receive recurring automated promotional calls and text messages from Cayad Auto Transport. These communications may be delivered by an AI voice agent or other automated technology. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out or HELP for help. Consent is not required to make a purchase. View our
+                  <a href="/pdfs/Terms-and-Conditions.pdf" className="text-sky-500 hover:underline mx-0.5">Terms</a>
+                  and <a href="/privacy-policy/" className="text-sky-500 hover:underline">Privacy Policy</a>.
+                </label>
               </div>
+
+
+
+
               <div className="flex gap-2 items-stretch pt-1">
                 <button type="button" onClick={() => setActiveStep(2)} className="inline-flex items-center justify-center rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Back</button>
                 <button id="submit_button"

@@ -239,7 +239,7 @@ const Step3 = ({ dataSubmit, handleSubmitLeadAndEmail, setActiveStep, setDataSub
             <small id="termsAndConditions">
               By providing your phone number/email and clicking through, you agree to Cayad Auto Transport's
               <a href="/pdfs/Terms-and-Conditions.pdf" className="text-btn-blue underline"> Terms </a>
-              and <a href="/privacy-policy/" className="text-btn-blue underline"> Privacy Policy </a> , and authorize us to make or initiate sales Calls, SMS, Emails, and prerecorded voicemails to that number using an automated system. Your agreement is not a condition of purchasing any products, goods, or services. You may opt out at any time by typing STOP. Message & data rates may apply.
+              and <a href="/privacy-policy/" className="text-btn-blue underline"> Privacy Policy </a> , and authorize us to make or initiate sales calls, SMS, emails, and prerecorded voicemails to that number using an automated system. Message frequency may vary. Your agreement is not a condition of purchasing any products, goods, or services. You may opt out at any time by typing STOP. For help, type HELP. Message & data rates may apply."
             </small>
           </div>
           <div className="flex gap-3 items-stretch mt-4">
