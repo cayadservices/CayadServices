@@ -1747,11 +1747,10 @@ export default function EstimatorQuote({ embedded = false }: { embedded?: boolea
                     id="sms_consent"
                     name="sms_consent"
                     value="yes"
-                    required
                     className="w-4 h-4 mt-0.5 shrink-0 accent-sky-600 cursor-pointer border-slate-300 rounded focus:ring-sky-500"
                   />
                   <label htmlFor="sms_consent" className="text-[10px] text-slate-400 leading-relaxed cursor-pointer select-none">
-                    By checking this box and submitting this form, you agree to receive promotional and informational SMS messages from Cayad Auto Transport at the mobile number provided. Message frequency varies. Msg & data rates may apply. Reply STOP to opt out. Reply HELP for help or contact us at 
+                    By checking this box and submitting this form, you agree to receive promotional and informational SMS messages from Cayad Auto Transport at the mobile number provided. Message frequency varies. Message & data rates may apply. Reply STOP to cancel. Reply HELP for help or contact us at 
                     <a href="mailto:info@cayadservices.com" className="text-sky-500 hover:underline mx-0.5">info@cayadservices.com</a>
                     or 
                     <a href="tel:+14696190747" className="text-sky-500 hover:underline mx-0.5">(469) 619-0747</a>. 
