@@ -1735,27 +1735,31 @@ export default function EstimatorQuote({ embedded = false }: { embedded?: boolea
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
                 <small className="text-[10px] text-slate-400 leading-relaxed">
-                  By checking this box, you consent to receive recurring automated promotional calls and text messages from Cayad Auto Transport. These communications may be delivered by an AI voice agent or other automated technology. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out or HELP for help. Consent is not required to make a purchase. View our
+                  By providing a telephone number and submitting this form you are consenting to be contacted by SMS text message from Cayad Auto Transport. Type of messages will include notifications, reminders, and promotional offers. Message & data rates may apply. Message frequency may vary. View our
                   <a href="/pdfs/Terms-and-Conditions.pdf" className="text-sky-500 hover:underline mx-0.5">Terms</a>
-                  and <a href="/privacy-policy/" className="text-sky-500 hover:underline">Privacy Policy</a>.
+                  and <a href="/privacy-policy/" className="text-sky-500 hover:underline">Privacy Policy</a>. Reply HELP for more information. You can reply STOP to opt-out of further messaging.
                 </small>
               </div> */}
 
                 <div className="flex items-start gap-3 px-1">
-                <input
-                  type="checkbox"
-                  id="sms_consent"
-                  name="sms_consent"
-                  value="yes"
-                  required
-                  className="w-4 h-4 mt-0.5 shrink-0 accent-sky-600 cursor-pointer border-slate-300 rounded focus:ring-sky-500"
-                />
-                <label htmlFor="sms_consent" className="text-[10px] text-slate-400 leading-relaxed cursor-pointer select-none">
-                  By checking this box, you consent to receive recurring automated promotional calls and text messages from Cayad Auto Transport. These communications may be delivered by an AI voice agent or other automated technology. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out or HELP for help. Consent is not required to make a purchase. View our
-                  <a href="/pdfs/Terms-and-Conditions.pdf" className="text-sky-500 hover:underline mx-0.5">Terms</a>
-                  and <a href="/privacy-policy/" className="text-sky-500 hover:underline">Privacy Policy</a>.
-                </label>
-              </div>
+                  <input
+                    type="checkbox"
+                    id="sms_consent"
+                    name="sms_consent"
+                    value="yes"
+                    className="w-4 h-4 mt-0.5 shrink-0 accent-sky-600 cursor-pointer border-slate-300 rounded focus:ring-sky-500"
+                  />
+                  <label htmlFor="sms_consent" className="text-[10px] text-slate-400 leading-relaxed cursor-pointer select-none">
+                    By checking this box and submitting this form, you agree to receive promotional and informational SMS messages from Cayad Auto Transport at the mobile number provided. Message frequency varies. Message & data rates may apply. Reply STOP to cancel. Reply HELP for help or contact us at 
+                    <a href="mailto:info@cayadservices.com" className="text-sky-500 hover:underline mx-0.5">info@cayadservices.com</a>
+                    or 
+                    <a href="tel:+14696190747" className="text-sky-500 hover:underline mx-0.5">(469) 619-0747</a>. 
+                    Consent is not a condition of purchase. See our 
+                    <a href="/pdfs/Terms-and-Conditions.pdf" className="text-sky-500 hover:underline mx-0.5">Terms</a>
+                    and 
+                    <a href="/privacy-policy/" className="text-sky-500 hover:underline mx-0.5">Privacy Policy</a>.
+                  </label>
+                </div>
 
 
 
