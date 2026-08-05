@@ -1,0 +1,21 @@
+:root {
+  --blog-ink: #0b2a3a;
+  --blog-muted: #526d7a;
+  --blog-blue: #00a1e1;
+  --blog-navy: #005c85;
+  --blog-paper: #f5f9f8;
+  --blog-line: #d9e7e8;
+}
+
+.blog-shell { background:var(--blog-paper); color:var(--blog-ink); }
+.blog-wrap { width:min(1180px, calc(100% - 2rem)); margin-inline:auto; }
+.blog-kicker { display:flex; align-items:center; gap:.65rem; color:var(--blog-navy); font-size:.73rem; font-weight:800; letter-spacing:.17em; text-transform:uppercase; }
+.blog-kicker::before { width:2rem; height:2px; background:var(--blog-blue); content:""; }
+.blog-display { font-family:"Outfit", sans-serif; font-weight:700; letter-spacing:-.035em; line-height:1.02; }
+.blog-tag { display:inline-flex; align-items:center; border:1px solid #c9dfe5; border-radius:999px; background:#fff; padding:.42rem .76rem; color:#315b6e; font-size:.72rem; font-weight:750; letter-spacing:.04em; }
+.blog-button { display:inline-flex; align-items:center; justify-content:center; gap:.65rem; border-radius:999px; background:var(--blog-blue); padding:.8rem 1.15rem; color:#fff; font-size:.82rem; font-weight:800; box-shadow:0 9px 25px rgba(0,161,225,.2); transition:.25s ease; }
+.blog-button:hover { transform:translateY(-2px); background:#008bc2; box-shadow:0 12px 30px rgba(0,92,133,.25); }
+
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+}
