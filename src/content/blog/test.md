@@ -6,7 +6,7 @@ updatedAt: "2026-08-07"
 author: "Cayad Auto Transport"
 state: ""
 tags: []
-coverImage: ""
+coverImage: "/img/blog/test-cover-1786119762309.png"
 coverAlt: ""
 featured: false
 draft: true
