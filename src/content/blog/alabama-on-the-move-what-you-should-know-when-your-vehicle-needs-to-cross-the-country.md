@@ -9,7 +9,7 @@ tags: ["Alabama","Car Shipping","Moving Guide"]
 coverImage: "/img/blog/alabama-on-the-move-what-you-should-know-when-your-vehicle-needs-to-cross-the-country-cover-1786213591057.png"
 coverAlt: "Vehicles loaded on an open auto transport carrier"
 featured: true
-draft: false
+draft: true
 seoTitle: "Cost & Tips | Cayad"
 seoDescription: "Ship a car to or from Alabama  with confidence. Explore costs, timing, popular routes and practical preparation tips from Cayad Auto Transport."
 ---
