@@ -36,14 +36,23 @@ Sometimes, paying to transport your vehicle means buying back the days you would
 ## What’s Driving the Movement of Vehicles Across the U.S.?
 Auto transport isn’t happening only because people are moving.
 Vehicles are constantly moving between states for many different reasons:
+
 •	People purchasing vehicles from out of state.
+
 •	Families relocating to a new state.
+
 •	College students taking their vehicles to another city.
+
 •	Military personnel relocating to a new duty station.
+
 •	Dealerships receiving vehicles from different markets.
+
 •	Buyers purchasing classic and collectible vehicles.
+
 •	Businesses and private sellers shipping vehicles out of state.
+
 •	Owners who need to move a second vehicle.
+
 Every vehicle has a different story, but they all have one thing in common: **They need to get there.**
 ## The Address on Your Quote May Not Be Where the Truck Actually Stops
 This is one detail that can prevent a lot of confusion.
