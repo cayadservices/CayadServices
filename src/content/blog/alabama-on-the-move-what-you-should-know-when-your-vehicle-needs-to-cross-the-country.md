@@ -1,5 +1,5 @@
 ---
-title: "Alabama on the Move: What You Should Know When Your Vehicle Needs to Cross the Country"
+title: "Alabama on the Move: Key Considerations for Shipping Your Vehicle"
 excerpt: "Some vehicles move from one city to another. Others move from one state to the next. And some end up traveling across nearly the entire country before reaching their new home."
 publishedAt: "2026-08-08"
 updatedAt: "2026-08-08"
@@ -95,4 +95,4 @@ That is the purpose of interstate auto transport: connecting places that are too
 At **Cayad Auto Transport**, we coordinate vehicle transportation to and from Alabama, helping owners connect their vehicles with destinations across the United States.
 Because when your next destination is far away, your vehicle doesn’t have to stay behind.
 
-**Ready to plan your move? Request a free quote for your auto shipment or call (469) 619-0747 to speak with a transport specialist.**
+**Ready to plan your move? Request a for your auto shipment or call (469) 619-0747 to speak with a transport specialist.**
