@@ -15,7 +15,7 @@ seoDescription: "Ship a car to or from Alabama  with confidence. Explore costs, 
 ---
 
 ### Alabama is part of that constant movement. Every day, personal vehicles, recently purchased cars, classic models, trucks, and everyday drivers need to travel between different parts of the country.
-### The question is no longer simply, “How do I get my car there?” It’s “What’s the smartest way to get it to its next destination?
+### The question is no longer simply, How do I get my car there? It’s What’s the smartest way to get it to its next destination?
 ## Your Car Can Be in Alabama Even When Its Buyer Is in Another State
 The automotive market no longer ends in the city where you live.
 You might find a vehicle in Birmingham while living in California. You could buy a truck in Mobile even though you live in Texas. Or you might sell a vehicle in Huntsville to a buyer in Florida.
