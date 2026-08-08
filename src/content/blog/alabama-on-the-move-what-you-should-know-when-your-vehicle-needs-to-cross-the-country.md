@@ -1,5 +1,5 @@
 ---
-title: "Alabama on the Move: Key Considerations for Shipping Your Vehicle"
+title: "Alabama on the Move: Connect Your Vehicle to Its Destination"
 excerpt: "What makes Alabama such an important hub for vehicle transportation?"
 publishedAt: "2026-08-08"
 updatedAt: "2026-08-08"
@@ -9,7 +9,7 @@ tags: ["Alabama","Car Shipping","Moving Guide"]
 coverImage: "/img/blog/alabama-on-the-move-what-you-should-know-when-your-vehicle-needs-to-cross-the-country-cover-1786213591057.png"
 coverAlt: "Vehicles loaded on an open auto transport carrier"
 featured: true
-draft: false
+draft: true
 seoTitle: "Cost & Tips | Cayad"
 seoDescription: "Ship a car to or from Alabama  with confidence. Explore costs, timing, popular routes and practical preparation tips from Cayad Auto Transport."
 ---
