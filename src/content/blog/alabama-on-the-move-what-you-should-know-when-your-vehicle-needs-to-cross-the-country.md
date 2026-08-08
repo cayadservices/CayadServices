@@ -2,11 +2,12 @@
 title: "Alabama on the Move: What You Should Know When Your Vehicle Needs to Cross the Country"
 excerpt: "Some vehicles move from one city to another. Others move from one state to the next. And some end up traveling across nearly the entire country before reaching their new home."
 publishedAt: "2026-08-08"
+updatedAt: "2026-08-08"
 author: "Cayad Auto Transport"
 state: "Alabama"
 tags: []
-coverImage: ""
-coverAlt: ""
+coverImage: "/img/blog/alabama-on-the-move-what-you-should-know-when-your-vehicle-needs-to-cross-the-country-cover-1786212030312.png"
+coverAlt: "Alabama"
 featured: true
 draft: true
 seoTitle: ""
