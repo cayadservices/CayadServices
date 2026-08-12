@@ -17,6 +17,7 @@ interface Props {
   type?: "website" | "article";
   publishedTime?: string;
   noindex?: boolean;
+  preloadImages?: Array<{ href: string; media?: string }>;
 }
 
 const {
@@ -28,6 +29,7 @@ const {
   type = "website",
   publishedTime,
   noindex = false,
+  preloadImages = [],
 } = Astro.props;
 const pageUrl = canonical || new URL(Astro.url.pathname, Astro.site || Astro.url.origin).toString();
 ---
@@ -86,8 +88,9 @@ const pageUrl = canonical || new URL(Astro.url.pathname, Astro.site || Astro.url
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    {preloadImages.map(({ href, media }) => (
+      <link rel="preload" as="image" href={href} media={media} fetchpriority="high" />
+    ))}
     <link rel="icon" type="image/webp" href="/img/title-icon.webp" sizes="120x120" />
 
     <meta name="google-site-verification" content="mYTM7w20cgtRtlR9aFWNFViHfvRiKXcCrYxMptzOg2M" />
@@ -117,7 +120,7 @@ const pageUrl = canonical || new URL(Astro.url.pathname, Astro.site || Astro.url
     </noscript>
 
     <Navbar client:load />
-    <SiteLanguageController client:load />
+    <SiteLanguageController client:idle />
     
     <main class={isLanding ? "" : "pt-[72px] sm:pt-[80px]"}>
       <slot />
@@ -125,7 +128,7 @@ const pageUrl = canonical || new URL(Astro.url.pathname, Astro.site || Astro.url
 
     <Footer />
     
-    <SocialProofMini client:load />
+    <SocialProofMini client:idle />
 
     <ShareButton />
 

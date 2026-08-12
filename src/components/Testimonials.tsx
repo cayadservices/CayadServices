@@ -247,7 +247,8 @@ const Testimonials = ({ title, position }: testimonialsType) => {
                   <div className="w-full flex flex-row items-center gap-4 relative z-10 mb-4">
                     <div className="shrink-0">
                       <img
-                        loading="eager"
+                        loading="lazy"
+                        decoding="async"
                         src={PRELOADED_BLOBS.get(imgSrc) ?? imgSrc}
                         width={50}
                         height={50}
@@ -263,7 +264,8 @@ const Testimonials = ({ title, position }: testimonialsType) => {
                     </div>
                     <div className="shrink-0">
                       <img
-                        loading="eager"
+                        loading="lazy"
+                        decoding="async"
                         src={PRELOADED_BLOBS.get(badgeSrc) ?? badgeSrc}
                         width={50}
                         height={50}

@@ -407,6 +407,10 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
   title="Premier Nationwide Auto Transport | Cayad Auto Transport"
   content="Cayad Auto Transport is the top-rated car shipping company in the USA. Fast, safe, reliable and cheap. Get your premium quote now!"
   isLanding={true}
+  preloadImages={[
+    { href: "/img/banner_new_horizontal.webp", media: "(min-width: 769px)" },
+    { href: "/img/banner_vertical.webp", media: "(max-width: 768px)" },
+  ]}
 >
 
   <section class="relative min-h-screen md:h-screen w-full overflow-hidden">
@@ -473,7 +477,7 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
       data-aos="fade-up"
       data-wow-delay="0.1s"
     >
-      <Testimonials title="Real Car Shipping Stories" client:load />
+      <Testimonials title="Real Car Shipping Stories" client:visible />
     </div>
 
     <div class="relative z-20 bg-white">
@@ -636,6 +640,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
         >
           <img
             src="/img/track.webp"
+            loading="lazy"
+            decoding="async"
             class="rounded-2xl w-full h-[300px] md:h-[400px] lg:h-[500px] object-cover shadow-2xl skew-y-1 transform transition-all hover:skew-y-0 duration-700"
             alt="car shipping gps tracking"
             width="1080"
@@ -735,6 +741,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
         >
           <img
             src="img/open-trailer.webp"
+            loading="lazy"
+            decoding="async"
             class="adjust--img rounded-2xl w-full h-[300px] md:h-[400px] lg:h-[500px] object-cover shadow-2xl skew-y-1 transform transition-all hover:skew-y-0 duration-700"
             alt="car shipping hotshot"
             width="1600"
@@ -760,6 +768,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
               <div class="mb-4 inline-block rounded-2xl bg-white p-4">
                 <img
                   src="../img/call.webp"
+                  loading="lazy"
+                  decoding="async"
                   class="w-16"
                   width="120"
                   height="120"
@@ -782,6 +792,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
               <div class="mb-4 inline-block rounded-2xl bg-white p-4">
                 <img
                   src="../img/insurance.webp"
+                  loading="lazy"
+                  decoding="async"
                   class="w-16"
                   width="120"
                   height="120"
@@ -827,6 +839,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
                   <img
                     class="w-full h-80 object-cover transform hover:scale-105 transition-transform duration-500"
                     src="../img/door-image.webp"
+                    loading="lazy"
+                    decoding="async"
                     width="543"
                     height="724"
                     alt="door to door car shipping"
@@ -857,6 +871,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
                     <img
                       class="w-full h-80 object-cover transform hover:scale-105 transition-transform duration-500"
                       src="../img/enclosed-car.webp"
+                      loading="lazy"
+                      decoding="async"
                       width="1600"
                       height="1200"
                       alt="enclosed car shipping"
@@ -887,6 +903,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
                     <img
                       class="w-full h-80 object-cover transform hover:scale-105 transition-transform duration-500"
                       src="../img/door-image.webp"
+                      loading="lazy"
+                      decoding="async"
                       width="543"
                       height="724"
                       alt="door to door car shipping"
@@ -919,6 +937,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
                     <img
                       class="w-full h-80 object-cover transform hover:scale-105 transition-transform duration-500"
                       src="/img/open-car.webp"
+                      loading="lazy"
+                      decoding="async"
                       width="1600"
                       height="900"
                       alt="open auto transport hotshot"
@@ -949,6 +969,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
                     <img
                       class="w-full h-80 object-cover transform hover:scale-105 transition-transform duration-500"
                       src="/img/motorcycle1.webp"
+                      loading="lazy"
+                      decoding="async"
                       width="2560"
                       height="1920"
                       alt="motorcycle transport"
@@ -979,6 +1001,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
                     <img
                       class="w-full h-80 object-cover transform hover:scale-105 transition-transform duration-500"
                       src="/img/classic-car5.webp"
+                      loading="lazy"
+                      decoding="async"
                       width="1978"
                       height="1085"
                       alt="classic car shipping"
@@ -1009,6 +1033,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
                     <img
                       class="w-full h-80 object-cover transform hover:scale-105 transition-transform duration-500"
                       src="/img/resellerx360.webp"
+                      loading="lazy"
+                      decoding="async"
                       width="1024"
                       height="576"
                       alt="car shipping for resellers"
@@ -1068,6 +1094,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
                 <div class="shrink-0 rounded-2xl bg-white p-3 h-fit">
                     <img
                     src="../img/dollar.webp"
+                    loading="lazy"
+                    decoding="async"
                     width="1080"
                     height="1080"
                     class="w-16 h-16 object-contain"
@@ -1089,6 +1117,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
                 <div class="shrink-0 rounded-2xl bg-white p-3 h-fit">
                     <img
                     src="../img/countries.webp"
+                    loading="lazy"
+                    decoding="async"
                     width="1080"
                     height="1080"
                     class="w-16 h-16 object-contain"
@@ -1110,6 +1140,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
                  <div class="shrink-0 rounded-2xl bg-white p-3 h-fit">
                     <img
                       src="../img/easy.webp"
+                      loading="lazy"
+                      decoding="async"
                       width="500"
                       height="500"
                       class="w-16 h-16 object-contain"
@@ -1131,6 +1163,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
                 <div class="shrink-0 rounded-2xl bg-white p-3 h-fit">
                     <img
                     src="../img/stars.webp"
+                    loading="lazy"
+                    decoding="async"
                     width="500"
                     height="500"
                     class="w-16 h-16 object-contain"
@@ -1154,6 +1188,8 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
             >
                 <img
                   src="img/company.webp"
+                  loading="lazy"
+                  decoding="async"
                   width="1080"
                   height="810"
                   class="object-cover rounded-2xl shadow-2xl w-full h-full"
@@ -1165,7 +1201,7 @@ import GlobalTrustBadges from "../components/GlobalTrustBadges.astro";
       </div>
     </div>
 
-    <ButtonScrollTop client:load />
+    <ButtonScrollTop client:idle />
   </div>
   </div>
 </Layout>
