@@ -4,7 +4,7 @@ excerpt: "Discover what makes Illinois unique: Chicago, Route 66, its history, a
 publishedAt: "2026-08-16"
 updatedAt: "2026-08-16"
 author: "Cayad Auto Transport"
-state: ""
+state: "Illinois"
 tags: ["Discover what makes Illinois unique: Chi","Route 66","its history","and the connections that keep the state"]
 coverImage: "/img/blog/illinois-four-reasons-that-make-it-unique-in-the-united-states-cover-1786846960487.png"
 coverAlt: "Sunset along Route 66, with Chicago in the distance."
