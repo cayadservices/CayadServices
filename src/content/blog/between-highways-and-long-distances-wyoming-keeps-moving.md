@@ -11,7 +11,7 @@ coverAlt: ""
 featured: false
 draft: true
 seoTitle: "Wyoming Vehicle Transport | Cayad Auto Transport"
-seoDescription: ""
+seoDescription: "Discover Wyoming through its vast distances, traditions, natural beauty, and highways, and see how these characteristics connect to vehicle transportation."
 ---
 
 *In Wyoming, distance feels different. The horizon seems endless, communities are separated by vast stretches of land, and highways become the thread that keeps connected a place where space is part of its identity.*
