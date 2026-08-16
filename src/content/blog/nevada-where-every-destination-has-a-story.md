@@ -36,7 +36,7 @@ Nevada is not a state that stands still. The growth of its major urban areas, th
 
 Las Vegas remains its biggest landmark, while other areas have gained greater economic and residential importance. As Nevada continues to evolve, so does the movement of people, families, and vehicles arriving in the state, relocating from one city to another, or beginning a new chapter.
 
-Nevada doesn’t just attract people—it moves stories, plans, and new opportunities.
+Nevada doesn’t just attract people it moves stories, plans, and new opportunities.
 
 ## A Land Meant to Be Explored
 
