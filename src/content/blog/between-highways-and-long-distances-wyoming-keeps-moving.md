@@ -5,12 +5,12 @@ publishedAt: "2026-08-16"
 updatedAt: "2026-08-16"
 author: "Cayad Auto Transport"
 state: ""
-tags: ["Wyoming | Auto Transport | Car Shipping "]
+tags: ["Wyoming | Auto Transport | Car Shipping"]
 coverImage: "/img/blog/between-highways-and-long-distances-wyoming-keeps-moving-cover-1786900535777.png"
 coverAlt: ""
 featured: false
 draft: true
-seoTitle: ""
+seoTitle: "Wyoming Vehicle Transport | Cayad Auto Transport"
 seoDescription: ""
 ---
 
