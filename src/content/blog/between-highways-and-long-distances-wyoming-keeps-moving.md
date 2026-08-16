@@ -6,7 +6,7 @@ updatedAt: "2026-08-16"
 author: "Cayad Auto Transport"
 state: "Wyoming"
 tags: ["Wyoming | Auto Transport | Car Shipping"]
-coverImage: "/img/blog/between-highways-and-long-distances-wyoming-keeps-moving-cover-1786900913650.png"
+coverImage: "/img/blog/between-highways-and-long-distances-wyoming-keeps-moving-cover-1786901157304.png"
 coverAlt: "Car carrier truck traveling along a Wyoming highway, with mountains, forests, and a natural landscape in the background."
 featured: false
 draft: true
