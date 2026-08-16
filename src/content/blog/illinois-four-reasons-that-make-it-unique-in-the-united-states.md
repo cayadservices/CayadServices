@@ -9,7 +9,7 @@ tags: ["Discover what makes Illinois unique: Chi","Route 66","its history","and 
 coverImage: "/img/blog/illinois-four-reasons-that-make-it-unique-in-the-united-states-cover-1786846960487.png"
 coverAlt: "Sunset along Route 66, with Chicago in the distance."
 featured: false
-draft: true
+draft: false
 seoTitle: "Illinois| Chicago | Route 66 | Auto Transport"
 seoDescription: "Discover Illinois beyond Chicago: explore Route 66, its history, its highways, and what makes this state truly unique."
 ---
