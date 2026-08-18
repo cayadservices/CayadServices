@@ -132,6 +132,7 @@ type ContactValues = {
   phone?: string; // optional, require at least one of phone/email via schema
   email?: string; // optional, require at least one of phone/email via schema
   website?: string; // honeypot
+  marketing_email_opt_in?: boolean;
 };
 
 type VehicleRow = {
@@ -349,6 +350,7 @@ export default function EstimatorQuote({ embedded = false }: { embedded?: boolea
         }),
       email: yup.string().required("Email is required").email("Please enter a valid email address."),
       website: yup.string().max(0).optional(),
+      marketing_email_opt_in: yup.boolean().default(false),
     });
   const step4 = useForm<ContactValues>({ resolver: yupResolver(contactSchema), mode: "onChange" });
 
@@ -1724,6 +1726,17 @@ export default function EstimatorQuote({ embedded = false }: { embedded?: boolea
                     </div>
                   )}
                 </div>
+                <label className="flex items-start gap-2 cursor-pointer text-xs text-slate-600 leading-relaxed">
+                  <input
+                    type="checkbox"
+                    className="mt-0.5 h-4 w-4 rounded border-slate-300 text-sky-600 focus:ring-sky-500"
+                    {...step4.register('marketing_email_opt_in')}
+                  />
+                  <span>
+                    I agree to receive occasional promotional emails from Cayad Auto Transport.
+                    I can unsubscribe at any time.
+                  </span>
+                </label>
               </div>
 
               {/* Honeypot field to deter bots */}
