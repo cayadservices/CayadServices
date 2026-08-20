@@ -3,15 +3,11 @@ import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
-import cloudflare from "@astrojs/cloudflare";
 
-// https://astro.build/config
 export default defineConfig({
   site: 'https://cayadservices.com/',
-  output: 'hybrid', // <--- CAMBIA 'static' a 'hybrid'
-  adapter: cloudflare({
-    mode: 'directory',
-  }),
+  output: 'static', // ✅ Ya lo tienes bien
+  // ❌ ELIMINA: adapter: cloudflare({ mode: 'directory' })
   integrations: [
     tailwind(),
     react(),
@@ -26,7 +22,6 @@ export default defineConfig({
       : []),
     sitemap(),
   ],
-  // Desactivar Sharp para que funcione en Cloudflare
   image: {
     service: {
       entrypoint: 'astro/assets/services/noop'
@@ -36,7 +31,6 @@ export default defineConfig({
     optimizeDeps: {
       force: true,
     },
-    // Excluir Sharp del build para evitar errores
     build: {
       rollupOptions: {
         external: ['sharp'],
