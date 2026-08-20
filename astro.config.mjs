@@ -3,12 +3,15 @@ import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
+import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://cayadservices.com/',
-  output: 'static', // <--- Cambio: 'hybrid' → 'static'
-  // ELIMINA: adapter: cloudflare({ mode: 'directory' }),
+  output: 'hybrid', // <--- CAMBIA 'static' a 'hybrid'
+  adapter: cloudflare({
+    mode: 'directory',
+  }),
   integrations: [
     tailwind(),
     react(),
