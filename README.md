@@ -72,3 +72,28 @@ Notes:
 - Estimate assumes Open and runs/drives by default; choosing Enclosed adjusts pricing.
 - Lead submission uses `sendLeadToLanding` and redirects to `/quote2`.
 - To revert, swap the import in `src/pages/quote/index.astro` back to `FormQuote`.
+
+## Roadbook blog and editor
+
+The public blog is available at `/blog/`. Articles live in
+`src/content/blog/*.md`, so Astro generates fast, indexable pages and includes
+them in the sitemap. Each article supports state, tags, cover image, draft and
+featured status, plus custom SEO title and description.
+
+The editorial studio is available at `/admin/`. It publishes content and image
+uploads directly to the `main` branch through the GitHub Contents API. A push
+then triggers the existing GitHub Pages deployment workflow.
+
+To sign in, create a fine-grained GitHub personal access token for the
+`cayadservices/CayadServices` repository with only **Contents: Read and write**.
+Paste it into the studio login. The token is kept only in JavaScript memory for
+the current tab; it is not written to local storage, cookies, the repository,
+or the built site.
+
+Run the focused browser checks with:
+
+```sh
+python /home/carlos/.agents/skills/webapp-testing/scripts/with_server.py \
+  --server "npm run dev -- --host 127.0.0.1" --port 4321 \
+  -- python scripts/test_blog_ui.py
+```

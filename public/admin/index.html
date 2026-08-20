@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Cayad Roadbook Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/admin/studio.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <section class="login-view" id="login-view">
+    <div class="login-card">
+      <a class="brand" href="/"><img src="/img/logo-cayad.webp" alt="Cayad Auto Transport" /><span>ROADBOOK<br/>STUDIO</span></a>
+      <p class="eyebrow">Editorial access</p>
+      <h1>Turn local knowledge into <em>organic reach.</em></h1>
+      <p class="login-copy">Sign in with a GitHub access token authorized for the CayadServices repository. It stays only in this browser tab.</p>
+      <form id="login-form">
+        <label for="token">GitHub access token</label>
+        <div class="token-field"><input id="token" type="password" autocomplete="off" placeholder="github_pat_…" required /><button type="button" id="toggle-token" aria-label="Show token">Show</button></div>
+        <button class="primary full" type="submit"><span>Open the studio</span><b>→</b></button>
+        <p class="form-error" id="login-error" role="alert"></p>
+      </form>
+      <details><summary>How do I create the token?</summary><p>In GitHub, create a fine-grained personal access token for <strong>cayadservices/CayadServices</strong> with repository <strong>Contents: Read and write</strong>. No other permission is needed.</p></details>
+    </div>
+    <aside class="login-art"><div class="route"><span>LOCAL STORY</span><i></i><strong>SEO</strong><i></i><span>NATIONAL REACH</span></div><blockquote>“Useful content earns attention long after the ad stops.”</blockquote><small>CAYAD CONTENT SYSTEM · 2026</small></aside>
+  </section>
+
+  <div class="studio" id="studio" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="/"><img src="/img/logo-cayad.webp" alt="Cayad" /><span>ROADBOOK<br/>STUDIO</span></a>
+      <button class="new-post" id="new-post" type="button"><span>＋</span> New article</button>
+      <nav><p>Content</p><button class="active" type="button"><span>Articles</span><b id="post-count">0</b></button><a href="/blog/" target="_blank"><span>View live blog</span><b>↗</b></a></nav>
+      <div class="user"><span class="avatar" id="user-avatar">C</span><div><strong id="user-name">Editor</strong><small>GitHub editor</small></div><button type="button" id="logout" title="Sign out">↪</button></div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar"><button class="mobile-menu" id="mobile-menu" aria-label="Open menu">☰</button><div><p class="eyebrow">Content library</p><h1>Articles</h1></div><label class="admin-search"><span>⌕</span><input id="admin-search" type="search" placeholder="Find an article…" /></label></header>
+      <section class="content-list" id="content-list"><div class="loading">Loading the roadbook…</div></section>
+    </main>
+  </div>
+
+  <div class="editor-overlay" id="editor-overlay" hidden>
+    <form class="editor" id="editor-form">
+      <header><div><p class="eyebrow" id="editor-mode">New article</p><h2 id="editor-heading">Untitled guide</h2></div><div class="editor-actions"><button class="secondary" type="button" id="close-editor">Cancel</button><button class="primary" type="submit" id="save-post"><span>Publish article</span><b>→</b></button></div></header>
+      <div class="editor-grid">
+        <section class="main-fields">
+          <label>Article title<input name="title" id="title" required maxlength="110" placeholder="Florida Car Shipping Guide" /></label>
+          <div class="field-row"><label>URL slug<input name="slug" id="slug" required pattern="[a-z0-9-]+" placeholder="florida-car-shipping-guide" /></label><label>State<input name="state" list="states" placeholder="Florida" /></label></div>
+          <label>Short description<textarea name="excerpt" id="excerpt" required maxlength="220" rows="3" placeholder="A clear summary shown in the article cards and search results."></textarea><small><span id="excerpt-count">0</span>/220</small></label>
+          <div class="body-label"><label for="body">Article content</label><span>Markdown supported</span></div>
+          <div class="toolbar" role="toolbar" aria-label="Text formatting">
+            <button type="button" data-insert="## |">H2</button><button type="button" data-insert="### |">H3</button><button type="button" data-wrap="**|**"><b>B</b></button><button type="button" data-wrap="[|](https://)">Link</button><button type="button" data-insert="- |">List</button><button type="button" id="body-image">▧ Image</button>
+          </div>
+          <textarea class="body-editor" name="body" id="body" required placeholder="Start with a useful introduction…"></textarea>
+        </section>
+        <aside class="settings">
+          <section><h3>Publishing</h3><label>Publish date<input name="publishedAt" id="publishedAt" type="date" required /></label><label>Author<input name="author" value="Cayad Auto Transport" required /></label><label class="check"><input name="featured" type="checkbox" /><span>Feature on blog home</span></label><label class="check"><input name="draft" type="checkbox" /><span>Save as draft</span></label></section>
+          <section><h3>Cover image</h3><button class="cover-upload" type="button" id="cover-upload"><img id="cover-preview" alt="" hidden/><span id="cover-placeholder">＋<b>Upload cover</b><small>JPG, PNG, WEBP · max 5 MB</small></span></button><input id="cover-file" type="file" accept="image/jpeg,image/png,image/webp,image/avif" hidden/><input name="coverImage" id="coverImage" required hidden/><label>Image alt text<input name="coverAlt" required placeholder="Describe the image for accessibility" /></label></section>
+          <section><h3>Organization</h3><label>Tags<input name="tags" placeholder="Florida, Car Shipping, Moving" /><small>Separate tags with commas</small></label></section>
+          <section><h3>Search appearance</h3><label>SEO title<input name="seoTitle" maxlength="60" placeholder="Optional · up to 60 characters" /></label><label>Meta description<textarea name="seoDescription" maxlength="160" rows="3" placeholder="Optional · up to 160 characters"></textarea></label></section>
+          <button class="danger" type="button" id="delete-post" hidden>Delete this article</button>
+        </aside>
+      </div>
+      <input id="body-image-file" type="file" accept="image/jpeg,image/png,image/webp,image/avif" hidden/>
+    </form>
+  </div>
+
+  <datalist id="states"><option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option></datalist>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="/admin/studio.js"></script>
+</body>
+</html>

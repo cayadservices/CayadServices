@@ -83,6 +83,7 @@ const NAV_TRANSLATIONS: Record<string, string> = {
   'COMPANY': 'COMPAÑÍA',
   'FAQS': 'PREGUNTAS FRECUENTES',
   'CONTACT': 'CONTACTO',
+  'BLOG': 'BLOG',
   'Services': 'Servicios',
   'Who We Serve': 'A quién servimos',
   'Language': 'Idioma',
@@ -440,6 +441,9 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
               <a href="/faqs/" className={classNames(currentPath === '/faqs/' ? 'text-[#00a1e1]' : 'text-slate-800', "navbar-navigation-link whitespace-nowrap text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors")}>
                 {navText('FAQS')}
               </a>
+              <a href="/blog/" className={classNames(isActive('/blog') ? 'text-[#00a1e1]' : 'text-slate-800', "navbar-navigation-link whitespace-nowrap text-sm font-semibold leading-6 hover:text-[#00a1e1] transition-colors")}>
+                {navText('BLOG')}
+              </a>
               <a href="/contact" className={classNames(currentPath === '/contact' ? 'text-btn-blue' : '', "navbar-navigation-link whitespace-nowrap text-sm font-semibold leading-6 text-slate-800 hover:text-[#00a1e1] transition-colors")}>
                 {navText('CONTACT')}
               </a>
@@ -600,6 +604,9 @@ export default function Navbar({ cleanMode = false }: NavbarProps) {
 
                   <a href="/faqs/" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-slate-900 hover:bg-slate-50 hover:text-[#00a1e1]">
                     {navText('FAQS')}
+                  </a>
+                  <a href="/blog/" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-slate-900 hover:bg-slate-50 hover:text-[#00a1e1]">
+                    {navText('BLOG')}
                   </a>
                   <a href="/contact" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-slate-900 hover:bg-slate-50 hover:text-[#00a1e1]">
                     {navText('CONTACT')}

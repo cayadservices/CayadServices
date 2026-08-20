@@ -1,0 +1,158 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/blog.css";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const featured = posts.find((post) => post.data.featured) || posts[0];
+const remainingPosts = posts;
+const states = [...new Set(posts.map((post) => post.data.state).filter(Boolean))].sort();
+const dateFormat = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+const readTime = (body: string) => Math.max(1, Math.ceil(body.trim().split(/\s+/).length / 220));
+---
+
+<Layout
+  title="Auto Transport Guides & State Car Shipping Advice | Cayad"
+  content="Expert auto transport guides, state-by-state car shipping advice, cost factors and preparation tips from Cayad Auto Transport."
+  canonical="https://cayadservices.com/blog/"
+>
+  <div class="blog-shell">
+    <section class="hero blog-wrap">
+      <div class="hero-copy">
+        <p class="blog-kicker">The Cayad Roadbook</p>
+        <h1 class="blog-display">Practical routes.<br/><em>Smarter moves.</em></h1>
+        <p>State-by-state car shipping advice, transparent cost factors and field-tested guidance for moving your vehicle anywhere in the USA.</p>
+      </div>
+      <div class="route-mark" aria-hidden="true">
+        <span>ORIGIN</span><i></i><strong>50</strong><i></i><span>STATES</span>
+      </div>
+    </section>
+
+    {featured && (
+      <section class="featured blog-wrap" aria-label="Featured article">
+        <a class="featured-image" href={`/blog/${featured.slug}/`}>
+          <img src={featured.data.coverImage} alt={featured.data.coverAlt} width="760" height="520" loading="eager" />
+          <span>Featured guide</span>
+        </a>
+        <div class="featured-copy">
+          <div class="article-meta"><span>{featured.data.state || "Nationwide"}</span><span>{dateFormat.format(featured.data.publishedAt)}</span><span>{readTime(featured.body)} min read</span></div>
+          <h2 class="blog-display"><a href={`/blog/${featured.slug}/`}>{featured.data.title}</a></h2>
+          <p>{featured.data.excerpt}</p>
+          <a class="read-link arrow-link" href={`/blog/${featured.slug}/`}>Read the full guide</a>
+        </div>
+      </section>
+    )}
+
+    <section class="library blog-wrap">
+      <div class="library-head">
+        <div><p class="blog-kicker">Shipping library</p><h2 class="blog-display">Explore every route</h2></div>
+        <label class="search"><span class="sr-only">Search articles</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="blog-search" type="search" placeholder="Search by state or topic…" /></label>
+      </div>
+
+      <div class="filters" aria-label="Filter articles by state">
+        <button class="active" type="button" data-filter="all">All guides</button>
+        {states.map((state) => <button type="button" data-filter={state?.toLowerCase()}>{state}</button>)}
+      </div>
+
+      <div class="post-grid" id="post-grid">
+        {remainingPosts.map((post, index) => (
+          <article class="post-card" data-state={post.data.state?.toLowerCase() || "nationwide"} data-search={`${post.data.title} ${post.data.excerpt} ${post.data.tags.join(" ")}`.toLowerCase()} style={`--delay:${index * 70}ms`}>
+            <a class="card-image" href={`/blog/${post.slug}/`}><img src={post.data.coverImage} alt={post.data.coverAlt} width="640" height="400" loading="lazy" /></a>
+            <div class="card-body">
+              <div class="article-meta"><span>{post.data.state || "Nationwide"}</span><span>{readTime(post.body)} min read</span></div>
+              <h3><a href={`/blog/${post.slug}/`}>{post.data.title}</a></h3>
+              <p>{post.data.excerpt}</p>
+              <div class="card-foot"><time datetime={post.data.publishedAt.toISOString()}>{dateFormat.format(post.data.publishedAt)}</time><a class="open-icon" href={`/blog/${post.slug}/`} aria-label={`Read ${post.data.title}`}></a></div>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="empty" id="empty-state" hidden>No guides match that search yet. Try another state or topic.</p>
+    </section>
+
+    <section class="cta-band">
+      <div class="blog-wrap"><div><p class="blog-kicker">Ready when you are</p><h2 class="blog-display">Your car's next chapter starts here.</h2></div><a class="blog-button arrow-link" href="/quote/">Get a free quote</a></div>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  const search = document.querySelector<HTMLInputElement>("#blog-search");
+  const cards = [...document.querySelectorAll<HTMLElement>(".post-card")];
+  const filters = [...document.querySelectorAll<HTMLButtonElement>("[data-filter]")];
+  const empty = document.querySelector<HTMLElement>("#empty-state");
+  let activeFilter = "all";
+
+  function updateCards() {
+    const term = search?.value.trim().toLowerCase() || "";
+    let visible = 0;
+    cards.forEach((card) => {
+      const matchesState = activeFilter === "all" || card.dataset.state === activeFilter;
+      const matchesSearch = !term || card.dataset.search?.includes(term);
+      card.hidden = !(matchesState && matchesSearch);
+      if (!card.hidden) visible++;
+    });
+    if (empty) empty.hidden = visible > 0;
+  }
+
+  filters.forEach((button) => button.addEventListener("click", () => {
+    activeFilter = button.dataset.filter || "all";
+    filters.forEach((item) => item.classList.toggle("active", item === button));
+    updateCards();
+  }));
+  search?.addEventListener("input", updateCards);
+</script>
+
+<style>
+  .hero { min-height:430px; display:grid; grid-template-columns:1.25fr .75fr; align-items:center; gap:4rem; padding-block:5.8rem 4rem; position:relative; }
+  .hero::after { position:absolute; right:16%; bottom:0; width:34%; height:1px; background:var(--blog-line); content:""; }
+  .hero h1 { margin:.9rem 0 1.4rem; font-size:clamp(3.2rem,7vw,6.7rem); }
+  .hero h1 em { color:var(--blog-blue); font-weight:400; }
+  .hero-copy>p:last-child { max-width:610px; color:var(--blog-muted); font-size:1.05rem; line-height:1.75; }
+  .route-mark { display:flex; align-items:center; justify-content:center; gap:.85rem; transform:rotate(-5deg); color:#66808b; font-size:.63rem; font-weight:800; letter-spacing:.18em; }
+  .route-mark i { flex:1; height:1px; background:#aac4ce; position:relative; }
+  .route-mark i::after { position:absolute; right:0; top:-3px; width:7px; height:7px; border-radius:50%; background:var(--blog-blue); content:""; }
+  .route-mark strong { color:var(--blog-navy); font:700 4.5rem/1 "Outfit",sans-serif; letter-spacing:-.08em; }
+  .featured { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr); overflow:hidden; background:#fff; border-radius:2px; box-shadow:0 24px 70px rgba(10,45,60,.1); }
+  .featured-image { min-height:510px; position:relative; overflow:hidden; }
+  .featured-image img { width:100%; height:100%; object-fit:cover; transition:transform .7s cubic-bezier(.2,.8,.2,1); }
+  .featured:hover .featured-image img { transform:scale(1.025); }
+  .featured-image>span { position:absolute; left:1.4rem; top:1.4rem; border-radius:999px; background:var(--blog-blue); padding:.55rem .85rem; color:#fff; font-size:.7rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase; }
+  .featured-copy { display:flex; flex-direction:column; justify-content:center; padding:clamp(2rem,5vw,4.5rem); }
+  .article-meta { display:flex; flex-wrap:wrap; gap:.7rem 1.3rem; color:#627a85; font-size:.68rem; font-weight:750; letter-spacing:.1em; text-transform:uppercase; }
+  .article-meta span+span { position:relative; }
+  .article-meta span+span::before { position:absolute; left:-.72rem; content:"·"; }
+  .featured h2 { margin:1.5rem 0; font-size:clamp(2.2rem,4vw,3.7rem); }
+  .featured h2 a:hover,.post-card h3 a:hover { color:var(--blog-blue); }
+  .featured-copy>p { color:var(--blog-muted); line-height:1.75; }
+  .read-link { align-self:flex-start; margin-top:2rem; border-bottom:1px solid var(--blog-blue); padding-bottom:.35rem; color:var(--blog-navy); font-size:.8rem; font-weight:850; letter-spacing:.08em; text-transform:uppercase; }
+  .arrow-link::after { display:inline-block; margin-left:.45rem; content:"\2192"; transition:transform .2s; }.arrow-link:hover::after{transform:translateX(4px)}
+  .library { padding-block:7rem; }
+  .library-head { display:flex; align-items:end; justify-content:space-between; gap:2rem; }
+  .library h2 { margin-top:.8rem; font-size:clamp(2.6rem,5vw,4.5rem); }
+  .search { display:flex; width:min(390px,100%); align-items:center; gap:.7rem; border-bottom:1px solid #9fb9c3; padding:.75rem .1rem; }
+  .search svg { width:1.15rem; fill:none; stroke:#527080; stroke-width:1.8; }
+  .search input { width:100%; outline:0; background:transparent; color:var(--blog-ink); font-size:.92rem; }
+  .filters { display:flex; gap:.55rem; overflow-x:auto; margin:2.6rem 0 2rem; padding-bottom:.4rem; scrollbar-width:thin; }
+  .filters button { flex:none; border:1px solid #bfd5dc; border-radius:999px; background:transparent; padding:.6rem .95rem; color:#4a6978; font-size:.75rem; font-weight:750; cursor:pointer; transition:.2s; }
+  .filters button:hover,.filters button.active { border-color:var(--blog-navy); background:var(--blog-navy); color:#fff; }
+  .post-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.4rem; }
+  .post-card { overflow:hidden; background:#fff; animation:card-in .6s both; animation-delay:var(--delay); }
+  .post-card[hidden] { display:none; }
+  @keyframes card-in { from{opacity:0;transform:translateY(16px)} }
+  .card-image { display:block; aspect-ratio:16/10; overflow:hidden; }
+  .card-image img { width:100%; height:100%; object-fit:cover; filter:saturate(.85); transition:.45s ease; }
+  .post-card:hover .card-image img { transform:scale(1.04); filter:saturate(1); }
+  .card-body { padding:1.45rem; }
+  .post-card h3 { margin:1rem 0 .7rem; font:700 1.5rem/1.2 "Outfit",sans-serif; letter-spacing:-.02em; }
+  .post-card p { color:var(--blog-muted); display:-webkit-box; overflow:hidden; font-size:.9rem; line-height:1.65; -webkit-box-orient:vertical; -webkit-line-clamp:3; }
+  .card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:1.4rem; border-top:1px solid #e2ecee; padding-top:1rem; color:#718792; font-size:.72rem; font-weight:700; }
+  .card-foot a { display:grid; width:2rem; height:2rem; place-items:center; border-radius:50%; background:#eff7f8; color:var(--blog-navy); transition:.2s; }.card-foot a:hover{background:var(--blog-blue);color:#fff;transform:rotate(45deg)}
+  .open-icon::after { content:"\2197"; }
+  .empty { border:1px dashed #b5ccd4; padding:3rem; color:var(--blog-muted); text-align:center; }
+  .cta-band { background:var(--blog-ink); color:#fff; padding-block:4.8rem; }
+  .cta-band>.blog-wrap { display:flex; align-items:center; justify-content:space-between; gap:2rem; }.cta-band .blog-kicker{color:#7fd9fa}.cta-band h2{max-width:720px;margin-top:.8rem;font-size:clamp(2.3rem,5vw,4rem)}
+  @media(max-width:900px){.hero{grid-template-columns:1fr;gap:1rem}.route-mark{max-width:400px}.featured{grid-template-columns:1fr}.featured-image{min-height:390px}.post-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:640px){.hero{min-height:auto;padding-block:4rem 3rem}.hero h1{font-size:3.5rem}.featured{width:100%}.featured-image{min-height:280px}.library{padding-block:5rem}.library-head,.cta-band>.blog-wrap{align-items:flex-start;flex-direction:column}.post-grid{grid-template-columns:1fr}.search{margin-top:1rem}.route-mark strong{font-size:3.4rem}}
+</style>

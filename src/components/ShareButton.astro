@@ -1,5 +1,6 @@
 ---
-/* Componente: Pestaña Lateral Izquierda Cayad - Full Social */
+const pageUrl = new URL(Astro.url.pathname, Astro.site || Astro.url.origin).toString();
+const encodedUrl = encodeURIComponent(pageUrl);
 ---
 
 <div class="share-drawer-container">
@@ -13,22 +14,22 @@
   </button>
 
   <div id="socialMenu" class="social-drawer">
-    <a href="https://api.whatsapp.com/send?text=Check%20out%20Cayad%20Auto%20Transport%20https://cayadservices.com" target="_blank" class="drawer-item" title="WhatsApp">
+    <a href={`https://api.whatsapp.com/send?text=Check%20out%20Cayad%20Auto%20Transport%20${encodedUrl}`} target="_blank" rel="noopener noreferrer" class="drawer-item" title="WhatsApp">
       <img src="/img/wa.png" alt="WhatsApp" />
     </a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https://cayadservices.com" target="_blank" class="drawer-item" title="Facebook">
+    <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`} target="_blank" rel="noopener noreferrer" class="drawer-item" title="Facebook">
       <img src="/img/fb.png" alt="Facebook" />
     </a>
-    <a href="https://www.instagram.com/cayadservices" target="_blank" class="drawer-item" title="Instagram">
+    <a href="https://www.instagram.com/cayadservices" target="_blank" rel="noopener noreferrer" class="drawer-item" title="Instagram">
       <img src="/img/in.png" alt="Instagram" />
     </a>
-    <a href="https://twitter.com/intent/tweet?url=https://cayadservices.com" target="_blank" class="drawer-item" title="X (Twitter)">
+    <a href={`https://twitter.com/intent/tweet?url=${encodedUrl}`} target="_blank" rel="noopener noreferrer" class="drawer-item" title="X (Twitter)">
       <img src="/img/tw.png" alt="X" />
     </a>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://cayadservices.com" target="_blank" class="drawer-item" title="LinkedIn">
+    <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`} target="_blank" rel="noopener noreferrer" class="drawer-item" title="LinkedIn">
       <img src="/img/li.png" alt="LinkedIn" />
     </a>
-    <a href="https://www.youtube.com/@cayadservices" target="_blank" class="drawer-item" title="YouTube">
+    <a href="https://www.youtube.com/@cayadservices" target="_blank" rel="noopener noreferrer" class="drawer-item" title="YouTube">
       <img src="/img/yt.png" alt="YouTube" />
     </a>
     <!-- <a href="https://www.reddit.com/submit?url=https://CayadAutoTransport" target="_blank" class="drawer-item" title="Reddit">
