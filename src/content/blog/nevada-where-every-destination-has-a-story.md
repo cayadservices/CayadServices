@@ -44,6 +44,6 @@ Traveling across Nevada means discovering a state where distance is part of the 
 
 Some routes invite you to stop and take in the scenery, while others are simply part of everyday life: reaching a new city, starting a new job, relocating, or getting a vehicle to its next destination. In a state this vast, every trip has its own purpose, and every journey tells a different story.
 
-**At Cayad Auto Transport**, we help coordinate vehicle transportation to, from, and within Nevada, making the journey as simple as possible for our customers. Whether you’re relocating, purchasing a vehicle, or simply prefer not to drive long distances, our goal is to help get your vehicle where it needs to go.
+**At Cayad Auto Transport** we help coordinate vehicle transportation to, from, and within Nevada, making the journey as simple as possible for our customers. Whether you’re relocating, purchasing a vehicle, or simply prefer not to drive long distances, our goal is to help get your vehicle where it needs to go.
 
 ### Is your next destination in Nevada? Make the journey easier. Get a quote for your vehicle transport or call (469) 619-0747 to speak with a transportation specialist.
